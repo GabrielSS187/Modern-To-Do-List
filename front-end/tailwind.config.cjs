@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
   content: [
     "./index.html",
@@ -14,7 +17,11 @@ module.exports = {
         "secondary-green": "#46BD62",
         "primary-orange": "#E88D39",
         "primary-bg": "#F2F2F2",
-      }
+      },
+      fontFamily: {
+        poppins: ["'Poppins'", ...defaultTheme.fontFamily.mono],
+        montserrat: ["'Montserrat'", ...defaultTheme.fontFamily.mono],
+      },
     },
   },
   plugins: [],
