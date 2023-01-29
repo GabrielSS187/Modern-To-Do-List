@@ -9,6 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      clipPath: {
+        myPolygon: "polygon(0 39%, 100% 0, 100% 65%, 0 100%)",
+      },
       colors: {
         "primary-black": "#000000",
         "secondary-black": "#06152B",
@@ -24,5 +27,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-clip-path")],
 }
