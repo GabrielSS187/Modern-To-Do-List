@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import update from "immutability-helper";
 
 import { Button } from "../../../common/Button";
 import { Todo } from "./Todo";
@@ -9,6 +10,7 @@ import completeTodoDemonstration from "../../../data/completeTodoDemonstration.j
 const listTodoDemonstration = completeTodoDemonstration;
 
 export function CompleteTodoList () {
+  const [cards, setCards] = useState(completeTodoDemonstration);
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLLIElement>, index: number) => {
@@ -21,6 +23,18 @@ export function CompleteTodoList () {
       setSelectedIndex(Math.max(selectedIndex - 1, 0));
     };
   };
+
+  
+  const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
+    setCards((prevCards) =>
+      update(prevCards, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, prevCards[dragIndex]],
+        ],
+      }),
+    );
+  }, []);
 
   return (
     <ul 
@@ -40,11 +54,13 @@ export function CompleteTodoList () {
 
         <div className="h-[17rem] overflow-hidden pt-7">
           {
-            listTodoDemonstration.map(( todo, index ) => {
+            cards.map(( todo, index ) => {
               return (
                 <Todo 
-                  idTodo={todo["id"]} todo={todo["to-do"]}
+                  key={todo["id"]}
+                  todo={todo}
                   index={index}
+                  moveCard={moveCard}
                   selectedIndex={selectedIndex}
                   onKeyDown={handleKeyDown}
                 />

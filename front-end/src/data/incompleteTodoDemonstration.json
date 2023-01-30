@@ -1,47 +1,47 @@
 [
   {
     "id": 1,
-    "to-do": "this is a new task",
+    "todo": "this is a new task",
     "complete": false
   },
   {
     "id": 2,
-    "to-do": "Develop the To-do list page",
+    "todo": "Develop the To-do list page",
     "complete": false
   },
   {
     "id": 3,
-    "to-do": "Create the drag-and-drop function",
+    "todo": "Create the drag-and-drop function",
     "complete": false
   },
   {
     "id": 4,
-    "to-do": "Add new tasks",
+    "todo": "Add new tasks",
     "complete": false
   },
   {
     "id": 5,
-    "to-do": "Delete itens",
+    "todo": "Delete itens",
     "complete": false
   },
   {
     "id": 6,
-    "to-do": "Erase all",
+    "todo": "Erase all",
     "complete": false
   },
   {
     "id": 7,
-    "to-do": "Checked item goes to Done list",
+    "todo": "Checked item goes to Done list",
     "complete": false
   },
   {
     "id": 8,
-    "to-do": "This item label may be edited",
+    "todo": "This item label may be edited",
     "complete": false
   },
   {
     "id": 9,
-    "to-do": "Editing an item...",
+    "todo": "Editing an item...",
     "complete": false
   }
 ]

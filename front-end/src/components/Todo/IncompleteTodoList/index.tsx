@@ -1,13 +1,16 @@
+import { useCallback, useState } from "react";
+import update from "immutability-helper";
+
 import { Button } from "../../../common/Button";
 import { Todo } from "./Todo";
 
 import incompleteTodoDemonstration from "../../../data/incompleteTodoDemonstration.json";
-import { useState } from "react";
 
 //* Array de demostração de to-dos incompletas.
 const listTodoDemonstration = incompleteTodoDemonstration;
 
 export function IncompleteTodoList () {
+  const [cards, setCards] = useState(incompleteTodoDemonstration);
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLLIElement>, index: number) => {
@@ -20,6 +23,17 @@ export function IncompleteTodoList () {
       setSelectedIndex(Math.max(selectedIndex - 1, 0));
     };
   };
+
+  const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
+    setCards((prevCards) =>
+      update(prevCards, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, prevCards[dragIndex]],
+        ],
+      }),
+    );
+  }, []);
 
   return (
     <ul 
@@ -40,14 +54,15 @@ export function IncompleteTodoList () {
         {/* Todos */}
         <div className="h-[27rem] overflow-x-hidden pt-7">
           {
-            listTodoDemonstration.map(( todo, index ) => {
+            cards.map(( todo, index ) => {
               return (
                 <Todo 
-                    idTodo={todo["id"]} 
-                    todo={todo["to-do"]} 
+                    key={todo["id"]}
+                    todo={todo} 
                     index={index}
                     selectedIndex={selectedIndex}
                     onKeyDown={handleKeyDown}
+                    moveCard={moveCard}
                   />
               )
             })
