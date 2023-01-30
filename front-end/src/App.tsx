@@ -7,7 +7,7 @@ export function App () {
     <>
       <Header />
 
-      <main>
+      <main role="main">
         <Info />
         <TodoContainer />
       </main>

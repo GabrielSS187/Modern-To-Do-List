@@ -27,5 +27,10 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwind-clip-path")],
+  plugins: [
+    require("tailwind-clip-path"), 
+    require('autoprefixer'),
+    require('tailwindcss'),
+    require('tailwind-scrollbar'),
+  ],
 }

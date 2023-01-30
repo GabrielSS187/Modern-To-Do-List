@@ -14,7 +14,7 @@ export function Info () {
           <p className="font-montserrat font-semibold leading-6 text-sm text-center sm:text-start">The only way to get things done</p>
           <br />
         </div>
-        <Button text="Go to To-do list" type="button" ariaLabel="Go to To-do list"/>
+        <Button text="Go to To-do list" type="button" ariaLabel="Go to To-do list" title="Go to To-do list"/>
       </div>
       <div className="hidden sm:block">
         <HeroContainer />

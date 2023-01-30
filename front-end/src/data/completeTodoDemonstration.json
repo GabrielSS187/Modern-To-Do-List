@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "to-do": "Get FTP credentials",
+    "complete": true
+  },
+  {
+    "id": 2,
+    "to-do": "Home Page Design",
+    "complete": true
+  },
+  {
+    "id": 3,
+    "to-do": "E-mail John about the deadline",
+    "complete": true
+  },
+  {
+    "id": 4,
+    "to-do": "E-mail John about the deadline",
+    "complete": true
+  },
+  {
+    "id": 5,
+    "to-do": "Send a gift to the client",
+    "complete": true
+  }
+]
