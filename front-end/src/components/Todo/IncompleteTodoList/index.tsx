@@ -1,22 +1,20 @@
 import { useCallback, useState } from "react";
 import update from "immutability-helper";
 
+import { infoTodoFolder } from "../../../data/GeneralInfo";
+
 import { Button } from "../../../common/Button";
 import { Todo } from "./Todo";
 
-import incompleteTodoDemonstration from "../../../data/incompleteTodoDemonstration.json";
-
-//* Array de demostração de to-dos incompletas.
-const listTodoDemonstration = incompleteTodoDemonstration;
-
 export function IncompleteTodoList () {
-  const [cards, setCards] = useState(incompleteTodoDemonstration);
+  //* Array de demostração de to-dos incompletas.
+  const [cards, setCards] = useState(infoTodoFolder.incompleteTodoList);
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLLIElement>, index: number) => {
     if (event.key === "ArrowDown") {
       event.preventDefault();
-      setSelectedIndex(Math.min(selectedIndex + 1, listTodoDemonstration.length - 1));
+      setSelectedIndex(Math.min(selectedIndex + 1, infoTodoFolder.incompleteTodoList.length - 1));
     };
     if (event.key === "ArrowUp") {
       event.preventDefault();
@@ -44,10 +42,12 @@ export function IncompleteTodoList () {
       <div className="h-5 w-full bg-primary-orange rounded-md"/>
       <section className="flex flex-col">
         <div className="flex flex-col items-center gap-3 mt-8">
-          <h2 className="font-poppins font-semibold text-4xl leading-6">To-do</h2>
+          <h2 className="font-poppins font-semibold text-4xl leading-6">
+          { infoTodoFolder.todo }
+          </h2>
           <p className="flex flex-col font-montserrat font-normal text-xl leading-6 text-center px-3">
-            <span>Take a breath.</span>
-            <span>Start doing.</span>
+            <span>{ infoTodoFolder.takeBreath }</span>
+            <span>{ infoTodoFolder.startDoing }</span>
           </p>
         </div>
 
@@ -75,12 +75,12 @@ export function IncompleteTodoList () {
             aria-label="see all completed tasks"
             title="see all completed tasks"
           >
-            see all
+            { infoTodoFolder.seeAll }
           </button>
           <Button 
-            text="erase all" 
-            ariaLabel="erase all" 
-            title="erase all"
+            text={ infoTodoFolder.seeAll } 
+            ariaLabel={ infoTodoFolder.seeAll }
+            title={ infoTodoFolder.seeAll }
             type="button" 
             width="w-[80%]"
             bg="bg-primary-black"

@@ -1,29 +1,26 @@
 import { useCallback, useState } from "react";
 import update from "immutability-helper";
 
+import { infoTodoFolder } from "../../../data/GeneralInfo";
+
 import { Button } from "../../../common/Button";
 import { Todo } from "./Todo";
 
-import completeTodoDemonstration from "../../../data/completeTodoDemonstration.json";
-
-//* Array de demostração de to-dos completas.
-const listTodoDemonstration = completeTodoDemonstration;
-
 export function CompleteTodoList () {
-  const [cards, setCards] = useState(completeTodoDemonstration);
+  //* Array de demostração de to-dos completas.
+  const [cards, setCards] = useState(infoTodoFolder.completeTodoList);
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLLIElement>, index: number) => {
     if (event.key === "ArrowDown") {
       event.preventDefault();
-      setSelectedIndex(Math.min(selectedIndex + 1, listTodoDemonstration.length - 1));
+      setSelectedIndex(Math.min(selectedIndex + 1, infoTodoFolder.completeTodoList.length - 1));
     };
     if (event.key === "ArrowUp") {
       event.preventDefault();
       setSelectedIndex(Math.max(selectedIndex - 1, 0));
     };
   };
-
   
   const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
     setCards((prevCards) =>
@@ -45,10 +42,10 @@ export function CompleteTodoList () {
       <div className="h-5 w-full bg-primary-green rounded-md"/>
       <section className="flex flex-col">
         <div className="flex flex-col items-center gap-3 mt-8">
-          <h2 className="font-poppins font-semibold text-4xl leading-6">Done</h2>
+          <h2 className="font-poppins font-semibold text-4xl leading-6">{ infoTodoFolder.done }</h2>
           <p className="flex flex-col font-montserrat text-xl leading-6 text-center px-3">
-            <span className="font-normal">Congratulions!</span>
-            <span className="font-bold">You have done 5 tasks</span>
+            <span className="font-normal">{ infoTodoFolder.Congratulations }</span>
+            <span className="font-bold">{ infoTodoFolder.youHave }</span>
           </p>
         </div>
 
@@ -72,15 +69,15 @@ export function CompleteTodoList () {
         <div className="w-full flex flex-col items-center gap-2">
           <button 
             className="border border-primary-green w-[80%] p-1 rounded-md hover:bg-green-500 hover:text-primary-white transition-all"
-            aria-label="see all completed tasks"
-            title="see all completed tasks"
+            aria-label={ infoTodoFolder.ariaLabel }
+            title={ infoTodoFolder.ariaLabel }
           >
             see all
           </button>
           <Button 
-            text="erase all" 
-            ariaLabel="erase all" 
-            title="erase all"
+            text={ infoTodoFolder.eraseAll } 
+            ariaLabel={ infoTodoFolder.eraseAll } 
+            title={ infoTodoFolder.eraseAll } 
             type="button" 
             width="w-[80%]"
             bg="bg-primary-black"
