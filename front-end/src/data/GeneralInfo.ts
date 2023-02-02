@@ -1,10 +1,17 @@
 import heroImg from "../assets/img/hero-img.png";
 import heroArrowImg from "../assets/img/hero-arrow-img.png";
 import image from "../assets/img/women-img.png";
+import whatsappLogo from "../assets/img/whatsapp-logo.png";
 
 import completeTodoDemonstration from "./completeTodoDemonstration.json";
 import incompleteTodoDemonstration from "./incompleteTodoDemonstration.json";
 import { listInfoSlides } from "./listInfoSlides";
+
+export const infoApp = {
+  scrollTop: "scroll top",
+  addWhatsapp: "add whatsapp",
+  whatsappLogo,
+};
 
 export const infoFolder = {
   heroImg,

@@ -1,3 +1,5 @@
+import { Link, animateScroll as scroll } from "react-scroll";
+
 import { Button } from "../../common/Button";
 import { HeroContainer } from "./HeroContainer";
 
@@ -18,12 +20,21 @@ export function Info () {
           </p>
           <br />
         </div>
-        <Button 
-          text={infoFolder.goTodoList} 
-          type="button" 
-          ariaLabel={infoFolder.goTodoList}
-          title={infoFolder.goTodoList} 
-        />
+        <Link
+          activeClass="active"
+          to="todoComponent"
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
+        >
+          <Button 
+            text={infoFolder.goTodoList} 
+            type="button" 
+            ariaLabel={infoFolder.goTodoList}
+            title={infoFolder.goTodoList} 
+          />
+        </Link>
       </div>
       <div className="hidden sm:block">
         <HeroContainer />

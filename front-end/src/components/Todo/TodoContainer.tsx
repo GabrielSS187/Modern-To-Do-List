@@ -9,7 +9,7 @@ import { UpArrowSvg } from "../../assets/svg/UpArrowSvg";
 
 export function TodoContainer () {
   return (
-    <section className="sm:mt-32 min-[900px]:mt-40 lg:mt-32">
+    <section id="todoComponent" className="sm:mt-32 min-[900px]:mt-40 lg:mt-32">
       <Head />
 
       <button 
