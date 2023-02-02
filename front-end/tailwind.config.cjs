@@ -7,7 +7,7 @@ module.exports = {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  import: true,
+  important: true,
   theme: {
     extend: {
       clipPath: {

@@ -15,7 +15,7 @@ export function Footer () {
         </h5>
       </div>
 
-      <div className="bg-primary-green h-8  w-[50%]" />
+      <div className="bg-primary-green h-8 w-[50%]" />
     </section>
   );
 };
