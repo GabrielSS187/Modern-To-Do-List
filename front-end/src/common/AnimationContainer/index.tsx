@@ -1,8 +1,8 @@
-import { Fade, FadeDirection } from "react-awesome-reveal";
+import { Fade } from "react-awesome-reveal";
 
 interface IProps {
   children: React.ReactNode
-  direction?: FadeDirection;
+  direction?: any;
   triggerOnce?: boolean;
   className?: string;
 };
@@ -17,5 +17,5 @@ export function AnimationContainer ({children, direction, triggerOnce, className
       >
       { children }
     </Fade>
-  )
+  );
 };
