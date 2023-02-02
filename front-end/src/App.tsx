@@ -12,12 +12,18 @@ import { AnimationContainer } from "./common/AnimationContainer";
 
 import { ArrowFatLinesUp } from "phosphor-react";
 
+import { Fade } from "react-awesome-reveal";
+
 export function App () {
   const [ handleClick, showButton ] = useScrollTop(200);
 
   return (
-    <>
-      <Header />
+    <div>
+      <Fade direction="left">
+        <h1>HHHHHHhh</h1>
+      </Fade>
+
+      {/* <Header />
 
       <main role="main">
         <Info />
@@ -27,19 +33,19 @@ export function App () {
         <Footer />
       </main>
 
-        <AnimationContainer direction="up" className={`fixed right-[0.5rem] ${ showButton ? "bottom-[5rem]" : "bottom-3" } z-50`}>
+        <AnimationContainer direction="up" triggerOnce={true} className={`fixed right-[0.5rem] ${ showButton ? "bottom-[5rem]" : "bottom-3" } z-50 animate-bounce`}>
           <button 
             aria-label={infoApp.addWhatsapp} title={infoApp.addWhatsapp}
           >
             <a href="https://wa.me/5583986785354?text=Olá Gabriel Silva, meu nome é:" target="_blank">
-              <img src={infoApp.whatsappLogo} alt="whatsapp" className="w-[2.9rem] sm:w-[3.5rem]" />
+              <img src={infoApp.whatsappLogo} alt="whatsapp" className="w-[2.5rem] sm:w-[3.5rem]" />
             </a>
           </button>
         </AnimationContainer>
 
         {
           showButton && (
-            <AnimationContainer direction="up"  className="fixed right-[.5rem] bottom-3 z-50">
+            <AnimationContainer direction="up" triggerOnce={true}  className="fixed right-[.3rem] bottom-3 z-50">
               <button 
                 onClick={handleClick} 
                 title={infoApp.scrollTop}
@@ -49,7 +55,7 @@ export function App () {
               </button>
             </AnimationContainer>
           )
-        }
-    </>
+        } */}
+    </div>
   );
 };

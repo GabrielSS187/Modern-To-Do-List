@@ -15,7 +15,6 @@ export function TodoContainer () {
         <Head />
       </AnimationContainer>
 
-
       <AnimationContainer>
         <button 
           aria-label="add new to-do"
@@ -33,7 +32,7 @@ export function TodoContainer () {
         <UpArrowSvg className="absolute mt-[3.5rem] w-24" fill="#49AF55" />
       </div>
 
-      <div className="flex px-3 flex-wrap flex-row-reverse justify-center w-full mt-5 mb-7 gap-5 md:gap-10">
+      <div className="flex px-3 flex-wrap flex-row-reverse justify-center mt-5 mb-7 gap-5 md:gap-10">
         <AnimationContainer direction="right">
           <CompleteTodoList />
         </AnimationContainer>

@@ -37,7 +37,7 @@ export function IncompleteTodoList () {
     <ul 
       role="list"
       aria-labelledby="list-todo-incomplete"
-      className="bg-primary-white h-[44rem] w-[90%] max-w-xs border-2 shadow shadow-neutral-900/100 rounded-md"
+      className="bg-primary-white h-[44rem] w-[100%] max-w-xs border-2 shadow shadow-neutral-900/100 rounded-md"
     >
       <div className="h-5 w-full bg-primary-orange rounded-md"/>
       <section className="flex flex-col">
@@ -78,7 +78,7 @@ export function IncompleteTodoList () {
             { infoTodoFolder.seeAll }
           </button>
           <Button 
-            text={ infoTodoFolder.seeAll } 
+            text={ infoTodoFolder.eraseAll } 
             ariaLabel={ infoTodoFolder.seeAll }
             title={ infoTodoFolder.seeAll }
             type="button" 

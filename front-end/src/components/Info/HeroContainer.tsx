@@ -4,7 +4,7 @@ import { AnimationContainer } from "../../common/AnimationContainer";
 
 export function HeroContainer () {
   return (
-    <div>
+    <>
       <AnimationContainer direction="right" triggerOnce={true} className="absolute -top-14 -right-20 sm:w-96 sm:top-14 md:w-[25rem] min-[900px]:w-[32rem] min-[900px]:-top-3 xl:w-[40rem]">
         <img src={infoFolder.heroArrowImg} alt="arrow image" className="z-10"/>
       </AnimationContainer>
@@ -15,6 +15,6 @@ export function HeroContainer () {
           className="z-10"
         />
       </AnimationContainer>
-    </div>
+    </>
   );
 };

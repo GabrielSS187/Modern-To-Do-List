@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import update from "immutability-helper";
 
 import { infoTodoFolder } from "../../../data/GeneralInfo";
+import { AnimationContainer } from "../../../common/AnimationContainer";
 
 import { Button } from "../../../common/Button";
 import { Todo } from "./Todo";
@@ -35,7 +36,7 @@ export function CompleteTodoList () {
 
   return (
     <ul 
-      className="bg-primary-white h-[33rem] w-[90%] max-w-xs border-2 shadow shadow-neutral-900/100 rounded-md"
+      className="bg-primary-white h-[33rem] w-[100%] max-w-xs border-2 shadow shadow-neutral-900/100 rounded-md"
       role="list"
       aria-labelledby="list-todo-complete"  
     >
