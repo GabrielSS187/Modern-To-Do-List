@@ -5,7 +5,7 @@ import { AnimationContainer } from "../../common/AnimationContainer";
 
 export function ContainerSlide () {
   return (
-    <AnimationContainer direction="right">
+    <AnimationContainer direction="right" triggerOnce={true}>
       <section className="mt-5 mb-[7rem] sm:mb-[10rem] min-[800px]:mt-28 relative">
         <div className="hidden min-[800px]:block bg-primary-green absolute -top-9 w-[70%] md:w-[70%] h-[30rem] -right-10 rounded-lg">
           <h2 className="font-montserrat font-bold text-4xl text-primary-white absolute top-[3rem] left-[4.5rem] xl:left-[8rem] 2xl:left-[5.4rem]">

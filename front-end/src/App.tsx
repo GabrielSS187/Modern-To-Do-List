@@ -12,18 +12,12 @@ import { AnimationContainer } from "./common/AnimationContainer";
 
 import { ArrowFatLinesUp } from "phosphor-react";
 
-import { Fade } from "react-awesome-reveal";
-
 export function App () {
   const [ handleClick, showButton ] = useScrollTop(200);
 
   return (
-    <div>
-      <Fade direction="left">
-        <h1>HHHHHHhh</h1>
-      </Fade>
-
-      {/* <Header />
+    <>
+      <Header />
 
       <main role="main">
         <Info />
@@ -45,7 +39,7 @@ export function App () {
 
         {
           showButton && (
-            <AnimationContainer direction="up" triggerOnce={true}  className="fixed right-[.3rem] bottom-3 z-50">
+            <AnimationContainer direction="up"  className="fixed right-[.3rem] bottom-3 z-50">
               <button 
                 onClick={handleClick} 
                 title={infoApp.scrollTop}
@@ -55,7 +49,7 @@ export function App () {
               </button>
             </AnimationContainer>
           )
-        } */}
-    </div>
+        }
+    </>
   );
 };
