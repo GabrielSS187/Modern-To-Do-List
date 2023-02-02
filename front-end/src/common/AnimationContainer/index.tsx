@@ -17,5 +17,5 @@ export function AnimationContainer ({children, direction, triggerOnce, className
       >
       { children }
     </Fade>
-  );
+  )
 };
