@@ -8,6 +8,7 @@ interface IProps {
   delay?: number,
   cascade?: true,
   damping?: number,
+  fraction?: 0 | 1;
 };
 
 export function AnimationContainer ({
@@ -17,7 +18,8 @@ export function AnimationContainer ({
   className,
   delay,
   cascade,
-  damping
+  damping,
+  fraction
 }: IProps) {
   return (
     <Fade
@@ -28,6 +30,7 @@ export function AnimationContainer ({
        delay={delay && delay}
        cascade={cascade && cascade}
        damping={damping && damping}
+       fraction={fraction ? fraction : 0}
       >
       { children }
     </Fade>

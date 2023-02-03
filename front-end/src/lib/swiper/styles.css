@@ -1,7 +1,6 @@
 .swiper {
   width: 100%;
-  height: 35rem;
- /* position: ; */
+  height: 33rem;
 }
 
 .swiper-slide { 
@@ -30,41 +29,36 @@
 
 @media only screen and (min-width: 650px) {
   .swiper {
-    height: 40rem;
+    height: 37rem;
   }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1000px) {
   .swiper {
-    height: 40rem;
-    position: relative;
+    width: 49rem !important;
+    margin-left: 14rem !important;
   }
 
   .swiper-pagination {
     width: 100% !important;
-    margin-left: 9rem;
+    display: flex !important;
+    justify-content: center;
   }
 
-  .swiper-pagination .swiper-horizontal>.swiper-pagination-bullets.swiper-pagination-bullets-dynamic, .swiper-pagination-horizontal.swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
-    padding-right: 100%;
+  /* .swiper-pagination .swiper-horizontal>.swiper-pagination-bullets.swiper-pagination-bullets-dynamic, .swiper-pagination-horizontal.swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
+    align-self: center !important;
+  }  */
+}
+
+@media only screen and (min-width: 1250px) {
+  .swiper {
+    width: 75rem !important;
+    margin-left: 15rem !important;
   }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1400px) {
   .swiper {
-    /* margin-left: 34.5rem !important; */
-    /* width: 55rem; */
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  .swiper {
-    margin-left: 24rem !important;
-  }
-}
-
-@media only screen and (min-width: 1100px) {
-  .swiper {
-      margin-left: 34.5rem !important;
+    margin-left: 12.5rem !important;
   }
 }

@@ -10,6 +10,9 @@ module.exports = {
   important: true,
   theme: {
     extend: {
+      screens: {
+        "m-desktop": "1440px"
+      },
       clipPath: {
         myPolygon: "polygon(0 39%, 100% 0, 100% 65%, 0 100%)",
         myPolygonFooter: "polygon(0 14%, 100% 0%, 100% 100%, 0% 100%)"

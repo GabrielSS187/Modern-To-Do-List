@@ -7,6 +7,8 @@ import completeTodoDemonstration from "./completeTodoDemonstration.json";
 import incompleteTodoDemonstration from "./incompleteTodoDemonstration.json";
 import { listInfoSlides } from "./listInfoSlides";
 
+const currentDate = new Date();
+
 export const infoApp = {
   scrollTop: "scroll top",
   addWhatsapp: "add whatsapp",
@@ -84,5 +86,5 @@ export const infoTodoFolder = {
 export const infoFooterFolder = {
   needHelp: "Need help?",
   email: "coopers@coopers.pro",
-  copyright: "© 2021 Gabriel and Coopers. All rights reserved."
+  copyright: `© ${currentDate.getFullYear()} Gabriel and Coopers. All rights reserved.`
 };

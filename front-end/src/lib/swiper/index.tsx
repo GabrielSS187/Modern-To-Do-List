@@ -27,31 +27,23 @@ export const settingsDefault: SwiperProps = {
   modules: [Autoplay, Pagination, Navigation],
   effect: "slide",
   breakpoints: {
-    500: {
-      spaceBetween: -200
+    550: {
+      spaceBetween: -220,
+      slidesPerView: 1
     },
-    570: {
-      spaceBetween: -250
+    768: {
+      spaceBetween: -350,
+      slidesPerView: 1,
     },
-    640: {
-      spaceBetween: -200,
-    },
-    730: {
-      spaceBetween: -250,
-    },
-    800: {
+    1000: {
       spaceBetween: 30,
       slidesPerView: 2,
-      virtual: true
     },
-    1024: {
-      spaceBetween: 80,
-      slidesPerView: 2,
-    },
-    1100: {
+    1250: {
+      spaceBetween: 30,
       slidesPerView: 3,
-    },
-  }
+    }
+  },
 };
 
 

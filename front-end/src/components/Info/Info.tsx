@@ -18,7 +18,9 @@ export function Info () {
               <AnimationContainer delay={1e2} cascade={true} damping={1e-1}>
                 { infoFolder.organize }
               </AnimationContainer>
-              <AnimationContainer delay={1e3} cascade={true} damping={1e-1} className="text-primary-green font-normal">
+              <AnimationContainer delay={1e3} cascade={true} damping={1e-1} 
+                className="text-primary-green font-normal"
+              >
                 { infoFolder.yourDailyJobs }
               </AnimationContainer>
             </div>
