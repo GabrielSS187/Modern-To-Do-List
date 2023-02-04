@@ -4,7 +4,14 @@ import { AnimationContainer } from "../../common/AnimationContainer";
 
 import { infoHeaderFolder } from "../../data/GeneralInfo";
 
-export function Header () {
+interface IProps {
+  setSelectModal: (params: {
+    types: "" | "login" | "cadaster" | "confirm";
+    contentLabel: string
+  }) => void;
+};
+
+export function Header ({setSelectModal}: IProps) {
   return (
     <header className="flex justify-between gap-5 px-3 py-5" role="banner">
       <AnimationContainer direction="left">
@@ -26,6 +33,7 @@ export function Header () {
           padding="p-1"
           ariaLabel={infoHeaderFolder.ariaLabel}
           title={infoHeaderFolder.ariaLabel}
+          onClick={() => setSelectModal({types: "login", contentLabel: "ola"})}
         />
       </AnimationContainer>
     </header>

@@ -1,23 +1,45 @@
+import { useState, useEffect } from "react";
+import { useScrollTop } from "./hook/useScrollTop";
 import { infoApp } from "./data/GeneralInfo";
 
 import { Header } from "./components/Header";
 import { Info } from "./components/Info";
 import { TodoContainer } from "./components/Todo";
-import { useScrollTop } from "./hook/useScrollTop";
 
 import { ContainerSlide } from "./components/InfoSlider";
 import { Form } from "./components/Form/Form";
 import { Footer } from "./components/Footer";
-import { AnimationContainer } from "./common/AnimationContainer";
+import { ModalContainer } from "./components/Modal/ModalContainer";
 
 import { ArrowFatLinesUp } from "phosphor-react";
 
-export function App () {
-  const [ handleClick, showButton ] = useScrollTop(200);
+type TSelectModal = {
+  types: "" | "login" | "cadaster" | "confirm";
+  contentLabel: string
+};
 
+export function App () {
+  const [ selectModal, setSelectModal ] = useState<TSelectModal>({
+    types: "",
+    contentLabel: ""
+  });
+  const [ handleClick, showButton ] = useScrollTop(200);  
+
+  useEffect(() => {
+    if ( selectModal.types ) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflowY = "auto";
+    };
+  }, [selectModal.types]);
+  
   return (
     <>
-      <Header />
+      <ModalContainer 
+        selectModal={selectModal}
+        setSelectModal={setSelectModal}
+      />
+      <Header setSelectModal={setSelectModal} />
 
       <main role="main">
         <Info />
@@ -27,7 +49,8 @@ export function App () {
         <Footer />
       </main>
 
-      <button 
+      <button
+        role="button"
         aria-label={infoApp.addWhatsapp} title={infoApp.addWhatsapp}
         className={`fixed right-[0.5rem] ${ showButton ? "bottom-[5rem]" : "bottom-3" } z-50 animate-bounce`}
       >
@@ -39,6 +62,7 @@ export function App () {
         {
           showButton && (
             <button 
+              role="button"
               onClick={handleClick} 
               title={infoApp.scrollTop}
               aria-label={infoApp.scrollTop}

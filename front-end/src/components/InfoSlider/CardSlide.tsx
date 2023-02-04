@@ -23,6 +23,7 @@ export function CardSlide ({ text, img, link }: IProps) {
       <div className=" flex flex-col items-start justify-around h-[16rem] p-5">
         <div className="flex flex-col gap-3 items-start">
           <button 
+            role="button"
             className="w-[7rem] border px-2 py-1 rounded-2xl border-primary-gray hover:bg-primary-green hover:text-white transition-all"
             aria-label="function"
             title="function"

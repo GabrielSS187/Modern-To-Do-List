@@ -64,13 +64,13 @@ export function Todo ({ todo, selectedIndex, index, onKeyDown, moveCard }: IProp
         role="listitem"
         onKeyDown={(e) => onKeyDown(e, index)}
       >
-      <button className="text-primary-orange" aria-label="check todo" title="check todo">
+      <button role="button" className="text-primary-orange" aria-label="check todo" title="check todo">
         <Circle size={27} />
       </button>
       <p className="flex-1 px-2 font-montserrat font-normal text-primary-black truncate">
           {todo.todo}
       </p>
-      <button className="hover:text-red-500" aria-label="delete to-do" title="delete to-do">
+      <button role="button" className="hover:text-red-500" aria-label="delete to-do" title="delete to-do">
         <Trash size={27} />
       </button>
     </li>

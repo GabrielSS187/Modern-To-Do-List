@@ -71,6 +71,7 @@ export function IncompleteTodoList () {
 
         <div className="w-full flex flex-col items-center gap-2 mt-4">
           <button 
+            role="button"
             className="border border-primary-orange w-[80%] p-1 rounded-md hover:bg-orange-500 hover:text-primary-white transition-all"
             aria-label="see all completed tasks"
             title="see all completed tasks"

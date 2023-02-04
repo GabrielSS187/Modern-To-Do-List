@@ -1,4 +1,4 @@
-import { Fade } from "react-awesome-reveal";
+import { Fade, Reveal } from "react-awesome-reveal";
 
 interface IProps {
   children: React.ReactNode
@@ -9,6 +9,7 @@ interface IProps {
   cascade?: true,
   damping?: number,
   fraction?: 0 | 1;
+  type?: "fade" | "reveal"
 };
 
 export function AnimationContainer ({
@@ -19,20 +20,41 @@ export function AnimationContainer ({
   delay,
   cascade,
   damping,
-  fraction
+  fraction,
+  type,
 }: IProps) {
   return (
-    <Fade
-       direction={direction}
-       triggerOnce={triggerOnce} 
-       duration={1200}
-       className={className ? className : className="z-50"}
-       delay={delay && delay}
-       cascade={cascade && cascade}
-       damping={damping && damping}
-       fraction={fraction ? fraction : 0}
-      >
-      { children }
-    </Fade>
+    <>
+      {
+        type === "reveal" ?
+        (
+          <Reveal
+            triggerOnce={triggerOnce} 
+            duration={1200}
+            className={className ? className : className="z-50"}
+            delay={delay && delay}
+            cascade={cascade && cascade}
+            damping={damping && damping}
+            fraction={fraction ? fraction : 0}
+          >
+            {children}
+          </Reveal>
+        ) :
+        (
+          <Fade
+            direction={direction}
+            triggerOnce={triggerOnce} 
+            duration={1200}
+            className={className ? className : className="z-50"}
+            delay={delay && delay}
+            cascade={cascade && cascade}
+            damping={damping && damping}
+            fraction={fraction ? fraction : 0}
+            >
+            { children }
+          </Fade>
+        )
+      }
+    </>
   );
 };

@@ -69,6 +69,7 @@ export function CompleteTodoList () {
 
         <div className="w-full flex flex-col items-center gap-2">
           <button 
+            role="button"
             className="border border-primary-green w-[80%] p-1 rounded-md hover:bg-green-500 hover:text-primary-white transition-all"
             aria-label={ infoTodoFolder.ariaLabel }
             title={ infoTodoFolder.ariaLabel }

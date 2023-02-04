@@ -1,4 +1,5 @@
-import InputMask from "react-input-mask";
+import { useRef } from 'react';
+import InputMask from "react-text-mask";
 
 import { infoFormFolder } from "../../data/GeneralInfo";
 
@@ -8,13 +9,18 @@ import { InboxSvg } from "../../assets/svg/InboxSvg";
 import { AnimationContainer } from "../../common/AnimationContainer";
 
 export function Form () {
+  const inputTelRef = useRef<HTMLInputElement | any>(null);
+  const regexInputTel = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   const inputClass = "h-9 rounded-sm outline outline-1 outline-secondary-black p-2 text-sm sm:text-lg focus:outline-primary-green";
   return (
     <AnimationContainer direction="left"
       className="w-full flex flex-col items-center mt-24 sm:mt-36 mb-10"
     >
-        <form className="bg-primary-white w-[80%] max-w-[44rem] px-7 pb-2 border-2 flex flex-col rounded-md shadow-md">
+        <form 
+          role="form"
+          className="bg-primary-white w-[80%] max-w-[44rem] px-7 pb-2 border-2 flex flex-col rounded-md shadow-md"
+        >
           <Head />
 
           <div className="relative bottom-7 flex justify-center gap-3 self-start">
@@ -59,7 +65,10 @@ export function Form () {
               <div className="flex flex-col md:w-1/2">
               <label htmlFor="telephone">{ infoFormFolder.inputTelephone.label }</label>
                 <InputMask
-                  mask="(99) 99999-9999"
+                  ref={inputTelRef}
+                  mask={regexInputTel}
+                  guide={false}
+                  showMask
                   id="telephone"
                   type="tel"
                   aria-label={ infoFormFolder.inputTelephone.ariaLabel }

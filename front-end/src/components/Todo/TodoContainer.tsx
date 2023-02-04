@@ -17,6 +17,7 @@ export function TodoContainer () {
 
       <AnimationContainer>
         <button 
+          role="button"
           aria-label="add new to-do"
           title="add new to-do"
           className="font-montserrat font-semibold h-12 mt-5 mx-auto px-4 flex flex-row-reverse items-center gap-2 rounded-md hover:border hover:border-primary-green"

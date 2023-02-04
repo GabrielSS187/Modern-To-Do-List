@@ -4,8 +4,11 @@ import { AnimationContainer } from "../../common/AnimationContainer";
 
 export function Footer () {
   return (
-    <AnimationContainer direction="">
-      <footer className="flex flex-col items-center bg-primary-black mt-16 pt-20 w-full sm:clip-path-myPolygonFooter">
+    <AnimationContainer>
+      <footer
+        role="contentinfo" 
+        className="flex flex-col items-center bg-primary-black mt-16 pt-20 w-full sm:clip-path-myPolygonFooter"
+      >
         <div className="text-primary-white flex flex-col items-center gap-4 pb-8">
           <h3 className="font-montserrat font-semibold text-xl">
             { infoFooterFolder.needHelp }

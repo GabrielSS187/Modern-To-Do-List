@@ -31,6 +31,10 @@ module.exports = {
         poppins: ["'Poppins'", ...defaultTheme.fontFamily.mono],
         montserrat: ["'Montserrat'", ...defaultTheme.fontFamily.mono],
       },
+      zIndex: {
+        "100": "100",
+        "90": "90"
+      }
     },
   },
   plugins: [
