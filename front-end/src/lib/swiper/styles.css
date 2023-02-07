@@ -57,8 +57,8 @@
   }
 }
 
-@media only screen and (min-width: 1400px) {
+@media only screen and (min-width: 1440px) {
   .swiper {
-    margin-left: 12.5rem !important;
+    margin-left: 20rem !important;
   }
 }

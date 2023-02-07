@@ -1,21 +1,28 @@
 import { useState, useEffect } from "react";
 import { useScrollTop } from "./hook/useScrollTop";
+import { ToastContainer } from 'react-toastify';
 import { infoApp } from "./data/GeneralInfo";
 
 import { Header } from "./components/Header";
 import { Info } from "./components/Info";
 import { TodoContainer } from "./components/Todo";
-
 import { ContainerSlide } from "./components/InfoSlider";
 import { Form } from "./components/Form/Form";
 import { Footer } from "./components/Footer";
 import { ModalContainer } from "./components/Modal/ModalContainer";
+import { infoTodoFolder } from "./data/GeneralInfo";
 
 import { ArrowFatLinesUp } from "phosphor-react";
 
 type TSelectModal = {
-  types: "" | "login" | "cadaster" | "confirm";
-  contentLabel: string
+  types: "" 
+  | "login" 
+  | "logout" 
+  | "completeTodoList" 
+  | "addNewTodo" 
+  | "deleteAllIncompleteTodo"
+  | "deleteAllCompleteTodo";
+  contentLabel: string;
 };
 
 export function App () {
@@ -23,7 +30,12 @@ export function App () {
     types: "",
     contentLabel: ""
   });
-  const [ handleClick, showButton ] = useScrollTop(200);  
+  const [ isLoading, setIsLoading ] = useState<boolean>(false),
+  [ userIsAuthenticated, setUserIsAuthenticated ] = useState<boolean>(false),
+  [ handleClick, showButton ] = useScrollTop(200);  
+
+  const completeTodoList = infoTodoFolder.completeTodoList,
+  incompleteTodoList = infoTodoFolder.incompleteTodoList;
 
   useEffect(() => {
     if ( selectModal.types ) {
@@ -35,15 +47,29 @@ export function App () {
   
   return (
     <>
+      <ToastContainer />
       <ModalContainer 
         selectModal={selectModal}
         setSelectModal={setSelectModal}
+        completeTodoList={completeTodoList}
+        incompleteTodoList={incompleteTodoList}
+        isLoadingTodosComplete={isLoading}
+        isLoadingTodosIncomplete={isLoading}
       />
-      <Header setSelectModal={setSelectModal} />
+      <Header 
+        setSelectModal={setSelectModal}
+        userIsAuthenticated={userIsAuthenticated}
+      />
 
       <main role="main">
         <Info />
-        <TodoContainer />
+        <TodoContainer
+          completeTodoList={completeTodoList}
+          incompleteTodoList={incompleteTodoList}
+          setSelectModal={setSelectModal}
+          isLoadingTodosComplete={isLoading}
+          isLoadingTodosIncomplete={isLoading}
+        />
         <ContainerSlide />
         <Form />
         <Footer />

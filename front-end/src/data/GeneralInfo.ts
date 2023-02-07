@@ -79,6 +79,7 @@ export const infoTodoFolder = {
   takeBreath: "Take a breath.",
   startDoing: "Start doing.",
   ariaLabel: "see all completed tasks",
+  emptyList: "Empty list",
   completeTodoList: completeTodoDemonstration,
   incompleteTodoList: incompleteTodoDemonstration,
 };
@@ -87,4 +88,47 @@ export const infoFooterFolder = {
   needHelp: "Need help?",
   email: "coopers@coopers.pro",
   copyright: `© ${currentDate.getFullYear()} Gabriel and Coopers. All rights reserved.`
+};
+
+export const infoModalFolder = {
+  addTodoModal: {
+    taskName: "Task name",
+    emptyList: "Empty list",
+    totalTasks: "Total tasks",
+    max30: "Maximum 30 characters",
+    min4: "At least 4 characters",
+    required: "Required",
+    addNewTask: "Add new task",
+    title: "save task",
+    placeholder: "Ex: today I'm going to walk",
+    ariaLabel: "put your task name here"
+  },
+  completeTodoListModal: {
+    totalTask: "Total tasks completed:",
+  },
+  confirmModal: {
+    deleteAllIncompleteTodo: "Are you sure you want to delete all your incomplete to-dos?",
+    deleteAllCompleteTodo: "Are you sure you want to delete all your complete to-dos?",
+    logoutAccount: "Are you sure you want to log out of your account?",
+    yes: "yes",
+    no: "no"
+  },
+  loginAndRegisterModal: {
+    login: "Login",
+    signIn: "Sign in",
+    register: "Register",
+    toAccess: "to access your list",
+    toCreate: "to create to-do list",
+    user: "User:",
+    chooseName: "Choose a name",
+    required: "Required",
+    min4: "At least 4 characters",
+    max20: "Maximum 20 characters",
+    password: "Password",
+    choosePassword: "Choose a password",
+    min6: "At least 6 characters",
+    max8: "Maximum 8 characters",
+    confirmPassword: "confirm password",
+    incompatiblePassword: "incompatible password"
+  }
 };

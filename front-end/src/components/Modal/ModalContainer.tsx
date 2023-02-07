@@ -4,22 +4,48 @@ import Modal from "react-modal";
 import { X } from "phosphor-react";
 
 import { LoginAndRegisterModal } from "./Modals/LoginAndRegisterModal";
+import { AddTodoModal } from "./Modals/AddTodoModal";
+import { CompleteTodoListModal } from "./Modals/CompleteTodoListModal";
+import { ConfirmModal } from "./Modals/ConfirmModal";
 
 interface IProps {
   selectModal: TSelectModal;
   setSelectModal: (params: TSelectModal) => void;
+  completeTodoList: TTodo[];
+  incompleteTodoList: TTodo[];
+  isLoadingTodosComplete: boolean;
+  isLoadingTodosIncomplete: boolean;
 };
 
 type TSelectModal = {
-  types: "" | "login" | "confirm";
+  types: "" 
+  | "login" 
+  | "logout" 
+  | "completeTodoList" 
+  | "addNewTodo" 
+  | "deleteAllIncompleteTodo"
+  | "deleteAllCompleteTodo";
   contentLabel: string;
+};
+
+export type TTodo = {
+  id: number;
+  todo: string;
+  complete: boolean;
 };
 
 type TCss = {
   content: React.CSSProperties;
 };
 
-export function ModalContainer ({ selectModal, setSelectModal }: IProps) {
+export function ModalContainer ({ 
+  selectModal, 
+  setSelectModal,
+  completeTodoList,
+  incompleteTodoList,
+  isLoadingTodosComplete,
+  isLoadingTodosIncomplete
+}: IProps) {
   const [ alterModal, setAlterModal ] = 
   useState<"login" | "register">("login");
 
@@ -29,17 +55,39 @@ export function ModalContainer ({ selectModal, setSelectModal }: IProps) {
     }; 
   }, [selectModal]);
 
+  const selectModalConfirm = () => {
+    switch ( selectModal.types ) {
+      case "logout":
+        customStyles.content.height = "20rem"
+        return <ConfirmModal setSelectModal={setSelectModal} 
+                  type={selectModal.types}
+                />;
+      case "deleteAllCompleteTodo":
+        customStyles.content.height = "20rem"
+        return <ConfirmModal setSelectModal={setSelectModal} 
+                  type={selectModal.types}
+                />;
+      case "deleteAllIncompleteTodo":
+        customStyles.content.height = "20rem"
+        return <ConfirmModal setSelectModal={setSelectModal} 
+                type={selectModal.types}
+               />;
+      default:
+        return;
+    };
+  };
+
   const customStyles: TCss = {
     content: {
       width: "min(80%, 50rem)",
-      height: "32rem",
+      ...(selectModal.types === "login" && {height: "32rem"}),
+      ...(selectModal.types === "login" && {padding: "10px"}),
+      overflowY: "hidden",
       paddingBottom: "3rem",
       margin: "0 auto",
       zIndex: 100,
-      overflowY: "hidden"
     },
   };
-
   return (
     <Modal
       isOpen={selectModal.types ? true : false}
@@ -49,17 +97,44 @@ export function ModalContainer ({ selectModal, setSelectModal }: IProps) {
       style={customStyles}
       role="dialog"
     >
-        <div className="flex flex-col">
+        <div className="flex flex-col relative h-full ">
           <div className="self-end">
-            <button role="button" onClick={() => setSelectModal({types: "", contentLabel: ""})}>
+            <button 
+              role="button" 
+              onClick={() => setSelectModal({types: "", contentLabel: ""})}
+              title="Close modal"
+              aria-label="Close Modal"
+            >
               <X size={32}/>
             </button>
           </div>
           <br />
-          <LoginAndRegisterModal 
-            alterModal={alterModal}
-            setAlterModal={setAlterModal}
-          />
+          { selectModal.types === "login" && 
+            (
+              <LoginAndRegisterModal 
+                alterModal={alterModal}
+                setAlterModal={setAlterModal}
+              />
+            ) 
+          }
+          { selectModal.types === "addNewTodo" &&
+            (
+              <AddTodoModal 
+                todoList={incompleteTodoList}
+                isLoadingTodosIncomplete={isLoadingTodosIncomplete}
+             />
+            )
+          }
+          { selectModal.types === "completeTodoList" &&
+            (
+              <CompleteTodoListModal 
+                todoList={completeTodoList}
+                isLoadingTodosComplete={isLoadingTodosComplete}
+              />
+            )
+          }
+
+          { selectModal.types && selectModalConfirm()  }
         </div>
     </Modal>
   );

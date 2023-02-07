@@ -7,7 +7,7 @@ export function ContainerSlide () {
   return (
     <AnimationContainer direction="down" className="relative mt-16">
       <>
-        <div className="hidden min-[1000px]:block w-[75%] h-[27rem] min-[1250px]:w-full m-desktop:w-[75%] ml-[10rem] bg-primary-green rounded-lg absolute">
+        <div className="hidden min-[1000px]:block w-[75%] h-[27rem] min-[1250px]:w-full m-desktop:w-[75%] ml-[10rem] m-desktop:ml-[18rem] bg-primary-green rounded-lg absolute">
           <h2 className="font-montserrat font-bold p-5 text-4xl text-primary-white absolute left-[3rem] min-[1000px]:top-5 min-[1250px]:left-[4rem] m-desktop:left-[1.5rem]">
             { infoSliderFolder.goodThings }
           </h2>

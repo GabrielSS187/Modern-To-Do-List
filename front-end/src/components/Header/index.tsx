@@ -6,12 +6,28 @@ import { infoHeaderFolder } from "../../data/GeneralInfo";
 
 interface IProps {
   setSelectModal: (params: {
-    types: "" | "login" | "cadaster" | "confirm";
+    types: "" | "login" | "logout";
     contentLabel: string
   }) => void;
+  userIsAuthenticated: boolean;
 };
 
-export function Header ({setSelectModal}: IProps) {
+export function Header ({setSelectModal, userIsAuthenticated}: IProps) {
+  const selectAction = () => {
+    if ( userIsAuthenticated ) {
+      setSelectModal({
+        types: "logout",
+        contentLabel: "logout"
+      })
+    };
+    if ( !userIsAuthenticated ) {
+      setSelectModal({
+        types: "login",
+        contentLabel: "login"
+      })
+    };
+  };
+
   return (
     <header className="flex justify-between gap-5 px-3 py-5" role="banner">
       <AnimationContainer direction="left">
@@ -25,7 +41,7 @@ export function Header ({setSelectModal}: IProps) {
       <AnimationContainer direction="right">
         <Button 
           type="button"
-          text={infoHeaderFolder.login} 
+          text={!userIsAuthenticated ? infoHeaderFolder.login : "logout"} 
           bg="bg-primary-black" 
           font="font-poppins" 
           width="w-24" 
@@ -33,8 +49,7 @@ export function Header ({setSelectModal}: IProps) {
           padding="p-1"
           ariaLabel={infoHeaderFolder.ariaLabel}
           title={infoHeaderFolder.ariaLabel}
-          onClick={() => setSelectModal({types: "login", contentLabel: "ola"})}
-        />
+          onClick={selectAction} />
       </AnimationContainer>
     </header>
   );
