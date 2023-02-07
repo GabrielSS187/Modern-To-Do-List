@@ -26,10 +26,7 @@ export function ConfirmModal ({ type, setSelectModal }: IProps) {
           ariaLabel={infoModalFolder.confirmModal.yes}
           text={infoModalFolder.confirmModal.yes}
           padding="p-1 md:p-2"
-          onClick={() => setSelectModal({
-            types: "",
-            contentLabel: ""
-          })}
+          onClick={() => {}}
         />
         <Button
           title={infoModalFolder.confirmModal.no}
