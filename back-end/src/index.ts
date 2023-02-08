@@ -2,12 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import { app } from "./server";
 import "express-async-errors";
 
+import { userRoutes } from "./routes/userRoutes";
 import { CustomError } from "./Errors/CustomError";
 
 
-app.use("/", async (req: Request, res: Response) => {
-  res.status(200).send("Olaaaaaa")
-});
+app.use("/user", userRoutes);
 
 //* Errors ============================================================
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {

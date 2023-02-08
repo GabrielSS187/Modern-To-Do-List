@@ -1,2 +1,21 @@
 ###
-GET http://localhost:8000
+GET http://localhost:8000/user/token
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc1ODMxNjQ5LCJleHAiOjE2NzU5MTgwNDl9.NHtk0I2WkRZ7koqnJeIsDWi_Fs13yECtomkaQBO-UAk
+
+###
+POST http://localhost:8000/user/register
+Content-Type: application/json
+
+{
+  "userName": "Gabriel_Silva",
+  "password": "123456bB"
+}
+
+###
+POST http://localhost:8000/user/signIn
+Content-Type: application/json
+
+{
+  "userName": "Gabriel_Silva",
+  "password": "123456bB"
+}

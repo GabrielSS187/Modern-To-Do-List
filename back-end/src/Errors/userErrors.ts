@@ -1,10 +1,10 @@
 import { CustomError } from "./CustomError";
 
-export class ErrorUserAlreadyExists extends CustomError {
+export class ErrorUser extends CustomError {
   constructor(
-    public message: string,
+    public error: Record<string, string>,
     public statusCode: number
   ){
-    super(message, statusCode);
+    super(error, statusCode);
   };
 };
