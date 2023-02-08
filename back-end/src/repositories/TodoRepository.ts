@@ -57,22 +57,22 @@ implements ITodoRepository {
 
   async getAllTodosComplete (idUser: number) {
     const todos = await Database.connection(`${this.#tableName.user} as U`)
-    .select("id_todo", "todo", "status")
-    .innerJoin(`${this.#tableName.todo} as T`, "U.id_user", "T.id_todo")
-    .where("id_user", idUser)
-    .where("status", true)
-    .orderBy("created_at", "desc");
+    .select("T.id_todo", "T.todo", "T.status")
+    .innerJoin(`${this.#tableName.todo} as T`, `U.id_user`, "T.id_user")
+    .where("U.id_user", idUser)
+    .where("T.status", true)
+    .orderBy("T.created_at", "desc");
     
     return todos;
   };
 
   async getAllTodosIncomplete (idUser: number) {
     const todos = await Database.connection(`${this.#tableName.user} as U`)
-    .select("id_todo", "todo", "status")
-    .innerJoin(`${this.#tableName.todo} as T`, "U.id_user", "T.id_todo")
-    .where("id_user", idUser)
-    .where("status", false)
-    .orderBy("created_at", "desc");
+    .select("T.id_todo", "T.todo", "T.status")
+    .innerJoin(`${this.#tableName.todo} as T`, "U.id_user", "T.id_user")
+    .where("U.id_user", idUser)
+    .where("T.status", false)
+    .orderBy("T.created_at", "desc");
     
     return todos;
   };

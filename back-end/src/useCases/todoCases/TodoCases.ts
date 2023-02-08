@@ -5,7 +5,8 @@ import {
   TCreateRequest, 
   createRequestSchema, 
   TUpdateStatusRequest,
-  TDeleteRequest
+  TDeleteRequest,
+  TGetAllTodos
 } from "./validations";
 import { ErrorTodo } from "../../Errors/TodoErrors";
 
@@ -100,6 +101,33 @@ export class TodoCases {
       idTodo,
       status: transformBoolean,
     });
+
+    return;
+  };
+
+  async getAllTodos (request: TGetAllTodos) {
+    const { idUser, typeList } = request;
+
+    if ( typeList !== "complete" && typeList !== "incomplete" ){
+      throw new ErrorTodo(
+        {error: "Type of valid lists: complete or incomplete."}, 
+        406
+      );
+    };
+
+    if ( typeList === "complete" ){
+      const todos = await this.todoRepository
+      .getAllTodosComplete(idUser);
+      
+      return todos;
+    };
+
+    if ( typeList === "incomplete" ){
+      const todos = await this.todoRepository
+      .getAllTodosIncomplete(idUser);
+      
+      return todos;
+    };
 
     return;
   };

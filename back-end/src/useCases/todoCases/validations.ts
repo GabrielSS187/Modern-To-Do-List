@@ -7,6 +7,10 @@ export const createRequestSchema = z.object({
 });
 
 export type TCreateRequest = z.infer<typeof createRequestSchema>;
+export type TGetAllTodos = {
+  idUser: number;
+  typeList: "complete" | "incomplete";
+};
 export type TDeleteRequest = {
   idUser: number;
   idTodo?: number;

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 
 import { TodoRepository } from "../repositories/TodoRepository";
 import { TodoCases } from "../useCases/todoCases/TodoCases";
+import { UserCases } from "../useCases/userCases/UserCases";
 
 const todoRepository = new TodoRepository();
 const todoCases = new TodoCases(
@@ -45,5 +46,17 @@ export class TodoControllers {
     });
 
     return res.status(200).json({success: "Status updated successfully."});
+  };
+
+  async getAllTodos (req: Request, res: Response) {
+    const idUser = req.userId as number;
+    const typeList: any = req.params.typeList;
+
+    const result = await todoCases.getAllTodos({
+      idUser,
+      typeList
+    });
+
+    return res.status(200).json(result);
   };
 };
