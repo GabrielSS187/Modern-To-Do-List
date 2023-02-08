@@ -3,10 +3,13 @@ import { app } from "./server";
 import "express-async-errors";
 
 import { userRoutes } from "./routes/userRoutes";
+import { todoRoutes } from "./routes/todoRoutes";
+import { authMiddleware } from "./middlewares/authMiddleware";
 import { CustomError } from "./Errors/CustomError";
 
 
 app.use("/user", userRoutes);
+app.use("/todo", authMiddleware, todoRoutes);
 
 //* Errors ============================================================
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {

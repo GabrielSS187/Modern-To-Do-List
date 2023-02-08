@@ -7,7 +7,7 @@ POST http://localhost:8000/user/register
 Content-Type: application/json
 
 {
-  "userName": "Gabriel_Silva",
+  "userName": "Lany_Santos",
   "password": "123456bB"
 }
 
@@ -16,6 +16,42 @@ POST http://localhost:8000/user/signIn
 Content-Type: application/json
 
 {
-  "userName": "Gabriel_Silva",
+  "userName": "Lany_Santos",
   "password": "123456bB"
 }
+
+//=====================================================================================================
+
+###
+POST http://localhost:8000/todo/create
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc1ODMxNjQ5LCJleHAiOjE2NzU5MTgwNDl9.NHtk0I2WkRZ7koqnJeIsDWi_Fs13yECtomkaQBO-UAk
+Content-Type: application/json
+
+{
+  "todo": "Olá Gabriel"
+}
+
+###
+POST http://localhost:8000/todo/create
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjc1ODgzMzMwLCJleHAiOjE2NzU5Njk3MzB9.hX_ny7g1lfrT6wsEdXBYW1KjBYsOoJRoF6DXLpah1DA
+Content-Type: application/json
+
+{
+  "todo": "Terror"
+}
+
+###
+PUT http://localhost:8000/todo/update-status/13/false
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc1ODMxNjQ5LCJleHAiOjE2NzU5MTgwNDl9.NHtk0I2WkRZ7koqnJeIsDWi_Fs13yECtomkaQBO-UAk
+
+###
+DELETE http://localhost:8000/todo/delete?todoId=10
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc1ODMxNjQ5LCJleHAiOjE2NzU5MTgwNDl9.NHtk0I2WkRZ7koqnJeIsDWi_Fs13yECtomkaQBO-UAk
+
+###
+DELETE http://localhost:8000/todo/delete?selectType=deleteAllIncomplete
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc1ODMxNjQ5LCJleHAiOjE2NzU5MTgwNDl9.NHtk0I2WkRZ7koqnJeIsDWi_Fs13yECtomkaQBO-UAk
+
+###
+DELETE http://localhost:8000/todo/delete?selectType=deleteAllComplete
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc1ODMxNjQ5LCJleHAiOjE2NzU5MTgwNDl9.NHtk0I2WkRZ7koqnJeIsDWi_Fs13yECtomkaQBO-UAk

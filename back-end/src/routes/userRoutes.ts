@@ -9,5 +9,5 @@ const userControllers = new UserControllers();
 
 userRoutes.get("/token", userControllers.getUserByToken);
 
-userRoutes.post("/register", userControllers.register);
-userRoutes.post("/signIn", userControllers.signIn);
+userRoutes.post("/register", userControllers.register)
+.post("/signIn", userControllers.signIn);
