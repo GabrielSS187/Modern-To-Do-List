@@ -1,7 +1,7 @@
 export type TTodo = {
-  id: number;
+  id_todo: number;
   todo: string;
-  complete: boolean;
+  status: boolean;
 };
 
 export interface IPropsTodoItem {

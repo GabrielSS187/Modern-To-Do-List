@@ -1,8 +1,4 @@
 import { useCallback, useState } from "react";
-import { DndProvider, } from "react-dnd";
-import { HTML5Backend  } from "react-dnd-html5-backend";
-import { TouchBackend } from "react-dnd-touch-backend";
-import { isMobile } from "react-device-detect";
 import update from "immutability-helper";
 
 import { Item } from "./Item"
@@ -14,14 +10,10 @@ interface IProps {
 };
 
 type TTodoList = {
-  id: number;
+  id_todo: number;
   todo: string;
-  complete: boolean;
+  status: boolean;
 };
-
-//* Verificar si esta no mobile para poder habilitar as movimentações
-//* de arrastar e soltar.
-const backend =  isMobile ? TouchBackend : HTML5Backend;
 
 //* Lib para movimentar elementos mobiles e desktop.
 export function ReactDnD ({ todoList, localView, typeList }: IProps) {
@@ -51,12 +43,12 @@ export function ReactDnD ({ todoList, localView, typeList }: IProps) {
   }, []);
 
   return (
-    <DndProvider backend={backend}>
+    <>
       {
           cards.map(( todo, index ) => {
             return (
               <Item
-                key={todo.id}
+                key={todo.id_todo}
                 todo={todo}
                 index={index}
                 moveCard={moveCard}
@@ -68,6 +60,6 @@ export function ReactDnD ({ todoList, localView, typeList }: IProps) {
             )
           })
         }
-    </DndProvider>
+    </>
   );
 };

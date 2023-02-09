@@ -34,8 +34,7 @@ export function IncompleteTodoList ({
       role="list"
       aria-labelledby="list-todo-incomplete"
       className={
-        localView === "modal" ? "absolute h-[100%] top-[6.9rem] w-full" :`bg-primary-white h-[44rem] 
-        ${incompleteTodoList?.length === 0 || isLoading ? "w-[20rem]" : "w-full max-w-xs"} border-2 shadow shadow-neutral-900/100 rounded-md`
+        localView === "modal" ? "absolute h-[100%] top-[6.9rem] w-full" : "bg-primary-white h-[44rem] border-2 shadow shadow-neutral-900/100 rounded-md"
       }
     >
       <div className="h-5 w-full bg-primary-orange rounded-md" />
@@ -58,7 +57,7 @@ export function IncompleteTodoList ({
         {/* Lista de tasks */}
         <div className={
               localView === "modal" ? "h-[70%] absolute right-0 left-0 overflow-x-hidden pt-1" :
-              `h-[27rem] overflow-hidden pt-7`
+              `w-[16rem] c-mobile:w-[20rem] h-[27rem] overflow-hidden pt-7`
             }
           >
             { isLoading && 

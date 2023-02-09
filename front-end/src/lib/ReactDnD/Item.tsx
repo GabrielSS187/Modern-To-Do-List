@@ -13,9 +13,9 @@ interface IProps {
 }
 
 type TTodoList = {
-  id: number;
+  id_todo: number;
   todo: string;
-  complete: boolean;
+  status: boolean;
 };
 
 export function Item({
@@ -25,7 +25,7 @@ export function Item({
   selectedIndex,
   moveCard,
   localView,
-  typeList
+  typeList,
 }: IProps) {
   const refItem = useRef<HTMLLIElement | null>(null);
 
@@ -100,11 +100,11 @@ export function Item({
     >
       <button
         role="button"
-        className={`${todo.complete ? "text-primary-green" : "text-primary-orange"}`}
+        className={`${todo.status ? "text-primary-green" : "text-primary-orange"}`}
         aria-label="uncheck todo"
         title="uncheck todo"
       >
-        { todo.complete ?
+        { todo.status ?
           ( <CheckCircle size={27} /> )
           :
           ( <Circle size={27} /> )

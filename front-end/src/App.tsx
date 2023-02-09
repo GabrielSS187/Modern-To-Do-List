@@ -1,4 +1,4 @@
-import { useState, useEffect, useId } from "react";
+import { useState, useEffect, useId, useCallback, useMemo } from "react";
 import { useScrollTop } from "./hook/useScrollTop";
 import { ToastContainer, toast } from "react-toastify";
 import { infoApp } from "./data/GeneralInfo";
@@ -12,7 +12,11 @@ import { Footer } from "./components/Footer";
 import { ModalContainer } from "./components/Modal/ModalContainer";
 import { infoTodoFolder } from "./data/GeneralInfo";
 import { queryClientObj } from "./services/queryClient.ts";
-import { register, signIn,getUserByToken } from "./endpoints/userApi";
+import { register, signIn, getUserByToken } from "./endpoints/userApi";
+import { 
+  getAllTodosCompleteApi,
+  getAllTodosIncompleteApi
+ } from "./endpoints/todoApi";
 
 import { ArrowFatLinesUp } from "phosphor-react";
 
@@ -27,7 +31,7 @@ type TSelectModal = {
   contentLabel: string;
 };
 
-const { useMutation } = queryClientObj;
+const { useMutation, useQuery } = queryClientObj;
 
 export function App () {
   const [ selectModal, setSelectModal ] = useState<TSelectModal>({
@@ -57,9 +61,8 @@ export function App () {
         toastId: `${id}:error-s`
       });
     },
-   });
-
-   const registerFunction = useMutation(register, {
+   }),
+    registerFunction = useMutation(register, {
     onSuccess: () => {
       toast.success("Account created successfully", {
         toastId: `${id}:success-c`
@@ -75,39 +78,48 @@ export function App () {
     },
    });
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!signInFunction.isSuccess && token !== null) {
-      (async () => {
-        const user = await getUserByToken();
-        setUserIsAuthenticated(!!user);
-        return;
+   useEffect(() => {
+     const token = localStorage.getItem("token");
+     if (!signInFunction.isSuccess && token !== null) {
+       (async () => {
+         const user = await getUserByToken();
+         setUserIsAuthenticated(!!user);
+         return;
       })();
     };
   }, [signInFunction.isSuccess, userIsAuthenticated]);
   
+  const todosCompleteApi = 
+  useQuery("todos-complete", getAllTodosCompleteApi, {
+    onSuccess: (data) => {
+      if (userIsAuthenticated && data!.length >= 0){
+        return data;
+      };
+      return;
+    },
+    refetchOnWindowFocus: false,
+  }),
+  todosIncompleteApi = 
+  useQuery("todos-incomplete", getAllTodosIncompleteApi, {
+    onSuccess: (data) => {
+      if (userIsAuthenticated && data!.length >= 0){
+        return data;
+      };
+      return;
+    },
+    refetchOnWindowFocus: false,
+  });
 
-  const completeTodoList = infoTodoFolder.completeTodoList,
-  incompleteTodoList = infoTodoFolder.incompleteTodoList;
-
-  useEffect(() => {
-    if ( selectModal.types ) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflowY = "auto";
-    };
-  }, [selectModal.types]);
-  
   return (
     <>
       <ToastContainer />
       <ModalContainer 
         selectModal={selectModal}
         setSelectModal={setSelectModal}
-        completeTodoList={completeTodoList}
-        incompleteTodoList={incompleteTodoList}
-        isLoadingTodosComplete={isLoading}
-        isLoadingTodosIncomplete={isLoading}
+        completeTodoList={todosCompleteApi.data || infoTodoFolder.completeTodoList}
+        incompleteTodoList={todosIncompleteApi.data || infoTodoFolder.incompleteTodoList}
+        isLoadingTodosComplete={todosCompleteApi.isLoading}
+        isLoadingTodosIncomplete={todosIncompleteApi.isLoading}
         signInFunction={signInFunction}
         registerFunction={registerFunction}
       />
@@ -119,11 +131,11 @@ export function App () {
       <main role="main">
         <Info />
         <TodoContainer
-          completeTodoList={completeTodoList}
-          incompleteTodoList={incompleteTodoList}
+          completeTodoList={todosCompleteApi.data || infoTodoFolder.completeTodoList}
+          incompleteTodoList={todosIncompleteApi.data || infoTodoFolder.incompleteTodoList}
           setSelectModal={setSelectModal}
-          isLoadingTodosComplete={isLoading}
-          isLoadingTodosIncomplete={isLoading}
+          isLoadingTodosComplete={todosCompleteApi.isLoading}
+          isLoadingTodosIncomplete={todosIncompleteApi.isLoading}
         />
         <ContainerSlide />
         <Form />
@@ -136,7 +148,7 @@ export function App () {
         className={`fixed right-[0.5rem] ${ showButton ? "bottom-[5rem]" : "bottom-3" } z-50 animate-bounce`}
       >
         <a href="https://wa.me/5583986785354?text=Olá Gabriel Silva, meu nome é:" target="_blank">
-          <img src={infoApp.whatsappLogo} alt="whatsapp" className="w-[2.5rem] sm:w-[3.5rem]" />
+          <img src={infoApp.whatsappLogo} alt="whatsapp" className="w-[2.7rem] sm:w-[3rem]" />
         </a>
       </button>
 
@@ -147,9 +159,9 @@ export function App () {
               onClick={handleClick} 
               title={infoApp.scrollTop}
               aria-label={infoApp.scrollTop}
-              className="fixed right-[.3rem] bottom-3 z-50"
+              className="fixed right-[.5rem] bottom-3 z-50"
             >
-              <ArrowFatLinesUp className="w-[3rem] h-[2em] animate-bounce text-blue-500" />
+              <ArrowFatLinesUp className="w-[3rem] h-[2rem] sm:h-[2.5rem] text-blue-500" />
             </button>
           )
         }

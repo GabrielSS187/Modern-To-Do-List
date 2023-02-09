@@ -13,3 +13,9 @@ export type TSignInResponse = {
   userName: string, 
   token: string;
 };
+
+export type TGetAllTodosResponse = {
+  id_todo: number;
+  todo: string;
+  status: boolean;
+};

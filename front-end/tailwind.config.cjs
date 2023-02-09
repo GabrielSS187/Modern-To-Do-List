@@ -11,7 +11,8 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        "m-desktop": "1440px"
+        "m-desktop": "1440px",
+        "c-mobile": "500px"
       },
       clipPath: {
         myPolygon: "polygon(0 39%, 100% 0, 100% 65%, 0 100%)",

@@ -32,8 +32,7 @@ export function CompleteTodoList ({
   return (
     <ul 
       className={
-        localView === "modal" ? "absolute h-[100%] top-[6.9rem] w-full" : `bg-primary-white h-[33rem] 
-        ${completeTodoList?.length === 0 || isLoading ? "w-[20rem]" : "w-full max-w-xs"} border-2 shadow shadow-neutral-900/100 rounded-md`
+        localView === "modal" ? "absolute h-[100%] top-[6.9rem] w-full" : "bg-primary-white h-[33rem] border-2 shadow shadow-neutral-900/100 rounded-md"
       }
       role="list"
       aria-labelledby="list-todo-complete"  
@@ -56,7 +55,7 @@ export function CompleteTodoList ({
         {/* Lista de tasks */}
         <div className={ localView === "modal" 
           ? "h-[70%] absolute right-0 left-0 overflow-x-hidden pt-1" :
-            `h-[17rem] overflow-hidden pt-7`
+            `w-[16rem] c-mobile:w-[20rem] h-[17rem] overflow-hidden pt-7`
           }
         >
 

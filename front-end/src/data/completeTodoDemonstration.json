@@ -1,27 +1,27 @@
 [
   {
-    "id": 1,
+    "id_todo": 1,
     "todo": "Get FTP credentials",
-    "complete": true
+    "status": true
   },
   {
-    "id": 2,
+    "id_todo": 2,
     "todo": "Home Page Design",
-    "complete": true
+    "status": true
   },
   {
-    "id": 3,
+    "id_todo": 3,
     "todo": "E-mail John about the deadline",
-    "complete": true
+    "status": true
   },
   {
-    "id": 4,
+    "id_todo": 4,
     "todo": "E-mail John about the deadline",
-    "complete": true
+    "status": true
   },
   {
-    "id": 5,
+    "id_todo": 5,
     "todo": "Send a gift to the client",
-    "complete": true
+    "status": true
   }
 ]

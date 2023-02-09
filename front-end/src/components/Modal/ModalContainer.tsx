@@ -40,9 +40,9 @@ type TSelectModal = {
 };
 
 export type TTodo = {
-  id: number;
+  id_todo: number;
   todo: string;
-  complete: boolean;
+  status: boolean;
 };
 
 type TCss = {
@@ -64,8 +64,14 @@ export function ModalContainer({
   useEffect(() => {
     if (selectModal.types.length === 0) {
       setAlterModal("login");
-    }
-  }, [selectModal]);
+    };
+
+    if ( selectModal.types ) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflowY = "auto";
+    };
+  }, [selectModal, selectModal.types]);
 
   const selectModalConfirm = () => {
     switch (selectModal.types) {
@@ -104,7 +110,6 @@ export function ModalContainer({
       ...(selectModal.types === "login" && { height: "32rem" }),
       ...(selectModal.types === "login" && { padding: "10px" }),
       overflowY: "hidden",
-      paddingBottom: "3rem",
       margin: "0 auto",
       zIndex: 100,
     },
