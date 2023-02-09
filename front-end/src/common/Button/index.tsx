@@ -1,5 +1,5 @@
 interface IProps {
-  text: string;
+  text: string | React.ReactNode;
   type: "submit" | "button";
   title: string;
   ariaLabel: string;

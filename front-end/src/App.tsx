@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 import { useScrollTop } from "./hook/useScrollTop";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import { infoApp } from "./data/GeneralInfo";
 
 import { Header } from "./components/Header";
@@ -11,6 +11,8 @@ import { Form } from "./components/Form/Form";
 import { Footer } from "./components/Footer";
 import { ModalContainer } from "./components/Modal/ModalContainer";
 import { infoTodoFolder } from "./data/GeneralInfo";
+import { queryClientObj } from "./services/queryClient.ts";
+import { register, signIn,getUserByToken } from "./endpoints/userApi";
 
 import { ArrowFatLinesUp } from "phosphor-react";
 
@@ -25,6 +27,8 @@ type TSelectModal = {
   contentLabel: string;
 };
 
+const { useMutation } = queryClientObj;
+
 export function App () {
   const [ selectModal, setSelectModal ] = useState<TSelectModal>({
     types: "",
@@ -32,7 +36,56 @@ export function App () {
   });
   const [ isLoading, setIsLoading ] = useState<boolean>(false),
   [ userIsAuthenticated, setUserIsAuthenticated ] = useState<boolean>(false),
-  [ handleClick, showButton ] = useScrollTop(200);  
+  [ handleClick, showButton ] = useScrollTop(200)
+  ,id = useId();
+  
+  const signInFunction = useMutation(signIn, {
+    onSuccess: ({data}) => { 
+      localStorage.setItem("token", data.token);
+      toast.success("Login successfully.", {
+        toastId: `${id}:success-s`
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    },
+    onError: (err: any) => {
+      const [errors]: string[] = 
+      Object.values(err.response?.data);
+      navigator.vibrate(200);
+      toast.error(errors, {
+        toastId: `${id}:error-s`
+      });
+    },
+   });
+
+   const registerFunction = useMutation(register, {
+    onSuccess: () => {
+      toast.success("Account created successfully", {
+        toastId: `${id}:success-c`
+      });
+    },
+    onError: (err: any) => {
+      const [errors]: string[] = 
+      Object.values(err.response?.data);
+      navigator.vibrate(200);
+      toast.error(errors, {
+        toastId: `${id}:error-c`
+      });
+    },
+   });
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!signInFunction.isSuccess && token !== null) {
+      (async () => {
+        const user = await getUserByToken();
+        setUserIsAuthenticated(!!user);
+        return;
+      })();
+    };
+  }, [signInFunction.isSuccess, userIsAuthenticated]);
+  
 
   const completeTodoList = infoTodoFolder.completeTodoList,
   incompleteTodoList = infoTodoFolder.incompleteTodoList;
@@ -55,6 +108,8 @@ export function App () {
         incompleteTodoList={incompleteTodoList}
         isLoadingTodosComplete={isLoading}
         isLoadingTodosIncomplete={isLoading}
+        signInFunction={signInFunction}
+        registerFunction={registerFunction}
       />
       <Header 
         setSelectModal={setSelectModal}

@@ -10,6 +10,19 @@ interface IProps {
 };
 
 export function ConfirmModal ({ type, setSelectModal }: IProps) {
+  const logout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
+  const selectAction = () => {
+    switch (type) {
+      case "logout": logout()
+        break;
+      default: 
+        return;
+    };
+  };
   
   return (
     <div className="flex flex-col h-full justify-center">
@@ -26,7 +39,7 @@ export function ConfirmModal ({ type, setSelectModal }: IProps) {
           ariaLabel={infoModalFolder.confirmModal.yes}
           text={infoModalFolder.confirmModal.yes}
           padding="p-1 md:p-2"
-          onClick={() => {}}
+          onClick={selectAction}
         />
         <Button
           title={infoModalFolder.confirmModal.no}
