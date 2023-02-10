@@ -38,20 +38,15 @@ export function App () {
     types: "",
     contentLabel: ""
   });
-  const [ isLoading, setIsLoading ] = useState<boolean>(false),
-  [ userIsAuthenticated, setUserIsAuthenticated ] = useState<boolean>(false),
+  const [ userIsAuthenticated, setUserIsAuthenticated ] = useState<boolean>(false),
   [ handleClick, showButton ] = useScrollTop(200)
   ,id = useId();
-  
+
   const signInFunction = useMutation(signIn, {
     onSuccess: ({data}) => { 
       localStorage.setItem("token", data.token);
-      toast.success("Login successfully.", {
-        toastId: `${id}:success-s`
-      });
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      localStorage.setItem("success", "success");
+      window.location.reload();
     },
     onError: (err: any) => {
       const [errors]: string[] = 
@@ -80,12 +75,24 @@ export function App () {
 
    useEffect(() => {
      const token = localStorage.getItem("token");
+     const success = localStorage.getItem("success");
      if (!signInFunction.isSuccess && token !== null) {
        (async () => {
          const user = await getUserByToken();
          setUserIsAuthenticated(!!user);
          return;
       })();
+    };
+
+    //* Notificar sucesso apos o login
+    if ( success !== "null" && success === "success" ){
+      toast.success("Login successfully.", {
+        toastId: `${id}:success-s`
+      });
+    };
+
+    window.onload = () => {
+      localStorage.removeItem("success");
     };
   }, [signInFunction.isSuccess, userIsAuthenticated]);
   
@@ -98,6 +105,7 @@ export function App () {
       return;
     },
     refetchOnWindowFocus: false,
+    retry: 1,
   }),
   todosIncompleteApi = 
   useQuery("todos-incomplete", getAllTodosIncompleteApi, {
@@ -108,6 +116,7 @@ export function App () {
       return;
     },
     refetchOnWindowFocus: false,
+    retry: 1,
   });
 
   return (
@@ -118,10 +127,11 @@ export function App () {
         setSelectModal={setSelectModal}
         completeTodoList={todosCompleteApi.data || infoTodoFolder.completeTodoList}
         incompleteTodoList={todosIncompleteApi.data || infoTodoFolder.incompleteTodoList}
-        isLoadingTodosComplete={todosCompleteApi.isLoading}
-        isLoadingTodosIncomplete={todosIncompleteApi.isLoading}
+        isLoadingTodosComplete={todosCompleteApi.isFetching}
+        isLoadingTodosIncomplete={todosIncompleteApi.isFetching}
         signInFunction={signInFunction}
         registerFunction={registerFunction}
+        userIsAuthenticated={userIsAuthenticated}
       />
       <Header 
         setSelectModal={setSelectModal}
@@ -134,8 +144,9 @@ export function App () {
           completeTodoList={todosCompleteApi.data || infoTodoFolder.completeTodoList}
           incompleteTodoList={todosIncompleteApi.data || infoTodoFolder.incompleteTodoList}
           setSelectModal={setSelectModal}
-          isLoadingTodosComplete={todosCompleteApi.isLoading}
-          isLoadingTodosIncomplete={todosIncompleteApi.isLoading}
+          isLoadingTodosComplete={todosCompleteApi.isFetching}
+          isLoadingTodosIncomplete={todosIncompleteApi.isFetching}
+          userIsAuthenticated={userIsAuthenticated}
         />
         <ContainerSlide />
         <Form />

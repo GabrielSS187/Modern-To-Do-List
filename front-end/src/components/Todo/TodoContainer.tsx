@@ -14,11 +14,13 @@ interface IProps {
   incompleteTodoList: TTodo[];
   isLoadingTodosComplete: boolean
   isLoadingTodosIncomplete: boolean;
+  userIsAuthenticated?: boolean;
   setSelectModal: (params: {
     types: "completeTodoList" 
     | "addNewTodo" 
     | "deleteAllIncompleteTodo"
-    | "deleteAllCompleteTodo",
+    | "deleteAllCompleteTodo"
+    | "login",
     contentLabel: string
   }) => void;
 };
@@ -28,8 +30,11 @@ export function TodoContainer ({
    completeTodoList, 
    incompleteTodoList,
    isLoadingTodosComplete,
-   isLoadingTodosIncomplete
+   isLoadingTodosIncomplete,
+   userIsAuthenticated
 }: IProps) { 
+  console.log(isLoadingTodosComplete);
+  
   return (
     <section id="todoComponent" className="sm:mt-32">
       <AnimationContainer>
@@ -64,6 +69,7 @@ export function TodoContainer ({
             completeTodoList={completeTodoList}
             setSelectModal={setSelectModal}
             isLoading={isLoadingTodosComplete}
+            userIsAuthenticated={userIsAuthenticated}
           />
         </AnimationContainer>
         <AnimationContainer direction="left">
@@ -71,6 +77,7 @@ export function TodoContainer ({
             incompleteTodoList={incompleteTodoList}
             setSelectModal={setSelectModal}
             isLoading={isLoadingTodosIncomplete}
+            userIsAuthenticated={userIsAuthenticated}
           />
         </AnimationContainer>
       </div>

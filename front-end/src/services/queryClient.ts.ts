@@ -3,11 +3,11 @@ import {
   QueryClient,
   useQuery,
   useMutation,
-  useQueryClient,
+  useQueryClient
 } from "react-query";
 
 export const queryClientObj = {
-  queryClient: new QueryClient(),
+  queryClient: QueryClient,
   dehydrate,
   useQuery,
   useMutation,

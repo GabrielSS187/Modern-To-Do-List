@@ -19,3 +19,7 @@ export type TGetAllTodosResponse = {
   todo: string;
   status: boolean;
 };
+
+export type TAddTodo = {
+  todo: string;
+};

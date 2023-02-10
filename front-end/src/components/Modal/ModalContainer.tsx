@@ -18,6 +18,7 @@ interface IProps {
   incompleteTodoList: TTodo[];
   isLoadingTodosComplete: boolean;
   isLoadingTodosIncomplete: boolean;
+  userIsAuthenticated: boolean;
   signInFunction: UseMutationResult<
     AxiosResponse<TSignInResponse, any>,
     any,
@@ -58,6 +59,7 @@ export function ModalContainer({
   isLoadingTodosIncomplete,
   signInFunction,
   registerFunction,
+  userIsAuthenticated,
 }: IProps) {
   const [alterModal, setAlterModal] = useState<"login" | "register">("login");
 
@@ -148,6 +150,8 @@ export function ModalContainer({
           <AddTodoModal
             todoList={incompleteTodoList}
             isLoadingTodosIncomplete={isLoadingTodosIncomplete}
+            userIsAuthenticated={userIsAuthenticated}
+            setSelectModal={setSelectModal}
           />
         )}
 

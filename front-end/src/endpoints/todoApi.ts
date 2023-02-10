@@ -1,6 +1,6 @@
 import { apiBase } from "../services/apiBase";
 
-import { TGetAllTodosResponse } from "./types";
+import { TGetAllTodosResponse, TAddTodo } from "./types";
 
 export const getAllTodosCompleteApi = async () => {
   const { data } = await 
@@ -12,4 +12,11 @@ export const getAllTodosIncompleteApi = async () => {
   const { data } = await 
   apiBase.get<TGetAllTodosResponse[]>("/todo/get-all/incomplete");
   return data;
+};
+
+export const addTodoApi = async ({ todo }: TAddTodo) => {
+  const res = await apiBase.post("/todo/create", {
+    todo,
+  });
+  return res;
 };

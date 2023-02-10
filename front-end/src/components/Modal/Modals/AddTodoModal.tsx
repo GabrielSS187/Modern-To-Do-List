@@ -1,33 +1,81 @@
-import { useId } from "react";
+import { useId, useEffect } from "react";
+// import { crypto } 
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
 import { IncompleteTodoList } from "../../Todo";
 import { Button } from "../../../common/Button";
 import { AnimationContainer } from "../../../common/AnimationContainer";
 import { TTodo } from "../ModalContainer";
+import { queryClientObj } from "../../../services/queryClient.ts";
+import { addTodoApi } from "../../../endpoints/todoApi";
 
 import { infoModalFolder } from "../../../data/GeneralInfo";
 
 interface IProps {
   todoList: TTodo[];
   isLoadingTodosIncomplete: boolean;
+  userIsAuthenticated: boolean;
+  setSelectModal: (params: TSelectModal) => void;
+};
+
+type TSelectModal = {
+  types:
+    | ""
+    | "login"
+  contentLabel: string;
 };
 
 type TFormType = {
   todo: string;
 };
 
-export function AddTodoModal ({ todoList, isLoadingTodosIncomplete }: IProps) {
-  const id = useId();
+const { useMutation, useQueryClient } = queryClientObj;
 
-  const { 
-    register, 
-    handleSubmit, 
-    formState: { errors },
-    clearErrors,
-    watch,
-    setError
-  } = useForm<TFormType>();
+export function AddTodoModal ({ 
+  todoList, 
+  isLoadingTodosIncomplete,
+  userIsAuthenticated,
+  setSelectModal,
+ }: IProps) {
+   const id = useId();
+   const queryClient = useQueryClient();
+
+   const { 
+     register, 
+     handleSubmit, 
+     formState: { errors },
+     reset
+   } = useForm<TFormType>();
+
+  const { mutate, isLoading } = useMutation(addTodoApi, {
+    onSuccess: (data) => {  
+      queryClient.invalidateQueries("todos-incomplete");
+      toast.success("Success to-do created.", {
+        toastId: `${id}:add-todo-success`,
+      });
+      reset({
+        todo: "",
+      });
+    },
+    onError: (err: any) => {
+      const [errors]: string[] = 
+      Object.values(err.response?.data);
+      toast.error(errors, {
+        toastId: `${id}: "add-todo-error"`
+      });
+    },
+  });
+
+  const formSubmit = (data: TFormType) => {
+    if ( !userIsAuthenticated ) {
+      setSelectModal({
+        types: "login",
+        contentLabel: "Login"
+      })
+      return;
+    };
+    mutate(data);
+  };
 
   if ( errors?.todo ) {
     toast(`${errors?.todo?.message}`, {
@@ -39,7 +87,7 @@ export function AddTodoModal ({ todoList, isLoadingTodosIncomplete }: IProps) {
   return (
     <AnimationContainer type="reveal" className="h-full">
       <div className="flex flex-col items-center">
-        <form onSubmit={handleSubmit(() => {})} className="flex flex-col gap-2 h-[7rem] w-full">
+        <form onSubmit={handleSubmit(formSubmit)} className="flex flex-col gap-2 h-[7rem] w-full">
           <div className="font-montserrat font-semibold">
             <label htmlFor="name-task">
               {infoModalFolder.addTodoModal.taskName}
@@ -61,7 +109,7 @@ export function AddTodoModal ({ todoList, isLoadingTodosIncomplete }: IProps) {
           <div className="flex gap-3">
             <Button
               type="submit"
-              text={infoModalFolder.addTodoModal.addNewTask}
+              text={isLoading ? "loading..." : infoModalFolder.addTodoModal.addNewTask}
               ariaLabel={infoModalFolder.addTodoModal.ariaLabel}
               title={infoModalFolder.addTodoModal.title}
               width="w-1/2 truncate"
@@ -82,7 +130,7 @@ export function AddTodoModal ({ todoList, isLoadingTodosIncomplete }: IProps) {
           )
         }
         {
-          todoList.length > 0 &&
+          !isLoadingTodosIncomplete && todoList.length > 0 &&
           (
             <IncompleteTodoList 
               incompleteTodoList={todoList}

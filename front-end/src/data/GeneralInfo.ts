@@ -92,12 +92,12 @@ export const infoFooterFolder = {
 
 export const infoModalFolder = {
   addTodoModal: {
-    taskName: "Task name",
+    taskName: "To-do name",
     emptyList: "Empty list",
     totalTasks: "Total tasks",
     max30: "Maximum 30 characters",
     min4: "At least 4 characters",
-    required: "Required",
+    required: "Required to-do",
     addNewTask: "Add new task",
     title: "save task",
     placeholder: "Ex: today I'm going to walk",

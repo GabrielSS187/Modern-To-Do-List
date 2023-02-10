@@ -9,6 +9,7 @@ interface IProps {
   incompleteTodoList: TTodo[];
   localView?: "modal" | "page";
   isLoading: boolean;
+  userIsAuthenticated?: boolean;
   setSelectModal?: (params: {
     types: "completeTodoList" 
     | "addNewTodo" 
@@ -21,7 +22,8 @@ export function IncompleteTodoList ({
   localView, 
   setSelectModal, 
   incompleteTodoList,
-  isLoading
+  isLoading,
+  userIsAuthenticated
 }: IProps) {
   const verifyQualityTodoLis = () => {
     if ( incompleteTodoList?.length === 0 ) return "add new task";
@@ -115,7 +117,7 @@ export function IncompleteTodoList ({
                 type="button" 
                 width="w-[80%]"
                 bg="bg-primary-black"
-                disabled={incompleteTodoList?.length === 0 || isLoading}
+                disabled={incompleteTodoList?.length === 0 || isLoading || !userIsAuthenticated}
                 onClick={() => setSelectModal!({
                   types: "deleteAllIncompleteTodo",
                   contentLabel: "Delete all incompleteTodo"
