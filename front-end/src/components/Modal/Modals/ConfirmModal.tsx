@@ -26,7 +26,7 @@ export function ConfirmModal ({ type, setSelectModal }: IProps) {
   const queryClient = useQueryClient();
 
   const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     window.location.reload();
   };
 
