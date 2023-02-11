@@ -7,7 +7,7 @@
 ### Link: [Modern-To-Do-List](https://ng-transactions-system.vercel.app/)
 ### Api Doc: [Api]()
 
-``Modern-To-Do-List`` É uma one-page full stack web, moderna e responsiva para todas os tamanhos de tela.
+``Modern-To-Do-List`` É uma one-page full stack web moderna, acessível é responsiva para todos os tamanhos de tela.
 
 A aplicação ``Modern-To-Do-List`` consiste em ser uma to-do list com um design moderno e atraente.
 Após você realiza o cadastro e o login na página você poderá criar, apagar e atualizar o estatus
@@ -21,12 +21,16 @@ https://user-images.githubusercontent.com/86306877/210931175-0e61967a-ec2a-4def-
 ## Layout Mobile e Tablet. Com demostração
 https://user-images.githubusercontent.com/86306877/210931205-5b5df8d6-dc79-46cc-9e6b-f42f9c81c8b7.mp4
 
+## Métricas lighthouse
+![Captura de Tela (318)](https://user-images.githubusercontent.com/86306877/218285889-676c2153-61f2-40ea-91f7-58617d3d702a.png)
+
 # Modelagem Conceitual de Dados
 ![Captura de Tela (316)](https://user-images.githubusercontent.com/86306877/218285587-65f2abbd-9e8f-42cc-bb29-d866cd2123f8.png)
 
 ## Competências
 - Semântica
 - Responsividade
+- Acessibilidade
 - Drag and Drop / Arrastar e soltar elementos
 - Boas Práticas
 - Princípios S.O.L.I.D
