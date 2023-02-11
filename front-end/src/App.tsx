@@ -85,14 +85,14 @@ export function App () {
     };
 
     //* Notificar sucesso apos o login
-    if ( success !== "null" && success === "success" ){
+    if ( success !== null && success === "success" ){
       toast.success("Login successfully.", {
         toastId: `${id}:success-s`
       });
     };
 
     window.onload = () => {
-      localStorage.removeItem("success");
+      localStorage.clear();
     };
   }, [signInFunction.isSuccess, userIsAuthenticated]);
   
