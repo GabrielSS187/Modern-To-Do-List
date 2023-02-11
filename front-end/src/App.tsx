@@ -73,6 +73,10 @@ export function App () {
     },
    });
 
+   window.onload = () => {
+    localStorage.removeItem("success");
+  };
+
    useEffect(() => {
      const token = localStorage.getItem("token");
      const success = localStorage.getItem("success");
@@ -89,10 +93,6 @@ export function App () {
       toast.success("Login successfully.", {
         toastId: `${id}:success-s`
       });
-    };
-
-    window.onload = () => {
-      localStorage.clear();
     };
   }, [signInFunction.isSuccess, userIsAuthenticated]);
   
