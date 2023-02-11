@@ -159,6 +159,7 @@ export function ModalContainer({
           <CompleteTodoListModal
             todoList={completeTodoList}
             isLoadingTodosComplete={isLoadingTodosComplete}
+            userIsAuthenticated={userIsAuthenticated}
           />
         )}
 

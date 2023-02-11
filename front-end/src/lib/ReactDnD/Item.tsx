@@ -1,22 +1,32 @@
+import { useState, useId } from "react";
 import { CheckCircle, Trash, Circle } from "phosphor-react";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
+import { toast } from "react-toastify";
+import { queryClientObj } from "../../services/queryClient.ts";
+import { 
+  deleteTodoApi,
+  updateStatusTodoApi
+} from "../../endpoints/todoApi";
 
 interface IProps {
   todo: TTodoList;
   index: number;
   selectedIndex: number;
+  userIsAuthenticated: boolean;
   onKeyDown: (event: React.KeyboardEvent<HTMLLIElement>, index: number) => void;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
   localView?: "modal" | "page";
   typeList: "complete" | "incomplete";
-}
+};
 
 type TTodoList = {
   id_todo: number;
   todo: string;
   status: boolean;
 };
+
+const { useQueryClient } = queryClientObj;
 
 export function Item({
   todo,
@@ -26,8 +36,12 @@ export function Item({
   moveCard,
   localView,
   typeList,
+  userIsAuthenticated
 }: IProps) {
-  const refItem = useRef<HTMLLIElement | null>(null);
+  const refItem = useRef<HTMLLIElement | null>(null),
+  id = useId();
+
+  const queryClient = useQueryClient();
 
   const [{ handlerId }, drop] = useDrop({
     accept: "card",
@@ -79,6 +93,47 @@ export function Item({
   const opacity = isDragging ? 0 : 1;
   drag(drop(refItem));
 
+  const updateStatus = async (todo: TTodoList) => {
+    try {
+      await toast.promise(updateStatusTodoApi({
+        idTodo: todo.id_todo,
+        status: todo.status === true ? false : true,
+      }), {
+        pending: "Processing",
+        ...(todo.status === false && { success: "Success 🎉🎉" })
+      });
+      queryClient.invalidateQueries("todos-complete");
+      queryClient.invalidateQueries("todos-incomplete");
+    } catch (err: any) {
+      console.log(err);
+      
+      const [errors]: string[] = 
+      Object.values(err.response?.data);
+      navigator.vibrate(200);
+      toast.error(errors, {
+        toastId: `${id}:error-delete-todo`
+      });
+    };
+  };
+
+  const deleteTodo = async (idTodo: number) => {
+    try {
+      await toast.promise(deleteTodoApi(idTodo), {
+        pending: "Processing",
+        success: "Success",
+      });
+      queryClient.invalidateQueries("todos-complete");
+      queryClient.invalidateQueries("todos-incomplete");
+    } catch (err: any) {      
+      const [errors]: string[] = 
+      Object.values(err.response?.data);
+      navigator.vibrate(200);
+      toast.error(errors, {
+        toastId: `${id}:error-delete-todo`
+      });
+    };
+  };
+
   const classLi = `flex px-3 mt-2 py-1 cursor-grabbing ${
     index === selectedIndex && 
     `${typeList === "complete" ? "border-primary-green" : "border-primary-orange"} border rounded-sm`
@@ -103,6 +158,8 @@ export function Item({
         className={`${todo.status ? "text-primary-green" : "text-primary-orange"}`}
         aria-label="uncheck todo"
         title="uncheck todo"
+        onClick={() => updateStatus(todo)}
+        disabled={!userIsAuthenticated}
       >
         { todo.status ?
           ( <CheckCircle size={27} /> )
@@ -121,6 +178,8 @@ export function Item({
         className="hover:text-red-500"
         aria-label="delete to-do"
         title="delete to-do"
+        onClick={() => deleteTodo(todo.id_todo)}
+        disabled={!userIsAuthenticated}
       >
         <Trash size={27} />
       </button>

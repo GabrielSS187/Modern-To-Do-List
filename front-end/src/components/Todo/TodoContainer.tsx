@@ -32,9 +32,7 @@ export function TodoContainer ({
    isLoadingTodosComplete,
    isLoadingTodosIncomplete,
    userIsAuthenticated
-}: IProps) { 
-  console.log(isLoadingTodosComplete);
-  
+}: IProps) {   
   return (
     <section id="todoComponent" className="sm:mt-32">
       <AnimationContainer>

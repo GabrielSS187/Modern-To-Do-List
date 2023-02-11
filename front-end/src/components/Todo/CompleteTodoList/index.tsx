@@ -11,7 +11,11 @@ interface IProps {
   isLoading: boolean;
   userIsAuthenticated?: boolean;
   setSelectModal?: (params: {
-    types: "completeTodoList" | "addNewTodo" | "deleteAllCompleteTodo";
+    types:
+      | "completeTodoList"
+      | "addNewTodo"
+      | "deleteAllCompleteTodo"
+      | "login";
     contentLabel: string;
   }) => void;
 }
@@ -81,6 +85,7 @@ export function CompleteTodoList({
               }
               localView={localView}
               typeList="complete"
+              userIsAuthenticated={userIsAuthenticated!}
             />
           )}
         </div>

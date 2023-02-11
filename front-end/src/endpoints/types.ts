@@ -23,3 +23,8 @@ export type TGetAllTodosResponse = {
 export type TAddTodo = {
   todo: string;
 };
+
+export type TUpdateStatusTodoParams = {
+  idTodo: number;
+  status: boolean;
+};

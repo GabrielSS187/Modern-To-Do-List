@@ -50,9 +50,7 @@ export function AddTodoModal ({
   const { mutate, isLoading } = useMutation(addTodoApi, {
     onSuccess: (data) => {  
       queryClient.invalidateQueries("todos-incomplete");
-      toast.success("Success to-do created.", {
-        toastId: `${id}:add-todo-success`,
-      });
+      toast.success("Success to-do created.");
       reset({
         todo: "",
       });
@@ -60,9 +58,7 @@ export function AddTodoModal ({
     onError: (err: any) => {
       const [errors]: string[] = 
       Object.values(err.response?.data);
-      toast.error(errors, {
-        toastId: `${id}: "add-todo-error"`
-      });
+      toast.error(errors);
     },
   });
 
@@ -135,6 +131,7 @@ export function AddTodoModal ({
             <IncompleteTodoList 
               incompleteTodoList={todoList}
               isLoading={isLoadingTodosIncomplete}
+              userIsAuthenticated={userIsAuthenticated}
               localView="modal"
             />
           )

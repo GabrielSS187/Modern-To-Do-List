@@ -13,7 +13,8 @@ interface IProps {
   setSelectModal?: (params: {
     types: "completeTodoList" 
     | "addNewTodo" 
-    | "deleteAllIncompleteTodo",
+    | "deleteAllIncompleteTodo"
+    | "login",
     contentLabel: string;
   }) => void;
 };
@@ -83,6 +84,7 @@ export function IncompleteTodoList ({
                   }
                   localView={localView}
                   typeList="incomplete"
+                  userIsAuthenticated={userIsAuthenticated!}
                 />
               )
             }
