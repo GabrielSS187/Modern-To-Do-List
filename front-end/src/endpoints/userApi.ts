@@ -23,6 +23,6 @@ export const getUserByToken = async () => {
     const { data } = await apiBase.get("/user/token");
     return data;
   } catch (err: any) {
-    console.log(err?.response?.data?.error);
+    console.log(err);
   };
 };

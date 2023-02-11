@@ -104,9 +104,7 @@ export function Item({
       });
       queryClient.invalidateQueries("todos-complete");
       queryClient.invalidateQueries("todos-incomplete");
-    } catch (err: any) {
-      console.log(err);
-      
+    } catch (err: any) {      
       const [errors]: string[] = 
       Object.values(err.response?.data);
       navigator.vibrate(200);

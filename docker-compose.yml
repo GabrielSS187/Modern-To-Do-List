@@ -1,0 +1,45 @@
+version: "4"
+services:
+  # Create database container
+  db:
+    container_name: database-todo
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=postgres
+    restart: always
+    ports:
+      - "5432:5432"
+
+  backend-t:
+    # Create backend container  
+    container_name: backend-todo
+    build: ./back-end
+    depends_on:
+      - db
+    links:
+      - db
+    environment:
+      - TZ=America/Sao_Paulo
+      - DATABASE_URL=postgres://postgres:root@db/postgres
+    volumes:
+      - ./back-end/src/data/data-docker:/var/lib/postgresql/data
+    restart: always
+    ports:
+      - "8000:8000"
+
+  # Create frontend container
+  frontend-t:
+    container_name: frontend-todo
+    build: ./front-end
+    depends_on:
+      - backend-t
+    links:
+      - backend-t
+    volumes:
+      - ./front-end:/usr/src/app/frontend-todo
+      - /usr/src/app/frontend-todo/node_modules
+    restart: always
+    ports:
+      - 5173:5173 
