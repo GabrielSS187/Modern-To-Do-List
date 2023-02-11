@@ -1,4 +1,5 @@
-import { useState, useEffect, useId, useCallback, useMemo } from "react";
+import { useState, useEffect, useId } from "react";
+import { isMobile } from "react-device-detect";
 import { useScrollTop } from "./hook/useScrollTop";
 import { ToastContainer, toast } from "react-toastify";
 import { infoApp } from "./data/GeneralInfo";
@@ -85,7 +86,7 @@ export function App () {
     };
 
     //* Notificar sucesso apos o login
-    if ( success !== null && success === "success" ){
+    if ( success !== null && success === "success" && !isMobile ){
       toast.success("Login successfully.", {
         toastId: `${id}:success-s`
       });
