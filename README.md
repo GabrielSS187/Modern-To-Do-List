@@ -16,10 +16,10 @@ você possa ter mais controle sobre suas to-dos. Todo isso com uma interface de 
 e animada para dar mais vida ao site.
 
 ## Layout Desktop. Com demostração
-https://user-images.githubusercontent.com/86306877/210931175-0e61967a-ec2a-4def-8dbf-5a729d725e49.mp4
+https://user-images.githubusercontent.com/86306877/218286294-f77a47a8-04bf-43e3-81bc-979f445d3647.mp4
 
 ## Layout Mobile e Tablet. Com demostração
-https://user-images.githubusercontent.com/86306877/210931205-5b5df8d6-dc79-46cc-9e6b-f42f9c81c8b7.mp4
+https://user-images.githubusercontent.com/86306877/218286303-a38f1ab3-e1a1-41b6-aadd-03aed599b9f0.mp4
 
 ## Métricas lighthouse
 ![Captura de Tela (318)](https://user-images.githubusercontent.com/86306877/218285889-676c2153-61f2-40ea-91f7-58617d3d702a.png)
