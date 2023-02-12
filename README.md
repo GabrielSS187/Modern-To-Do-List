@@ -12,7 +12,7 @@
 A aplicação ``Modern-To-Do-List`` consiste em ser uma to-do list com um design moderno e atraente.
 Após você realiza o cadastro e o login na página você poderá criar, apagar e atualizar o estatus
 de suas to-dos. E além disso você poderá arrasta e soltar suas to-dos para qualquer posição da sua lista para que 
-você possa ter mais controle sobre suas to-dos. Todo isso com uma interface de usuário fluida, interativa
+você possa ter mais controle sobre elas. Todo isso com uma interface de usuário fluida, interativa
 e animada para dar mais vida ao site.
 
 ## Layout Desktop. Com demostração
