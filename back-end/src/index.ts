@@ -5,7 +5,7 @@ import "express-async-errors";
 import { userRoutes } from "./routes/userRoutes";
 import { todoRoutes } from "./routes/todoRoutes";
 import { authMiddleware } from "./middlewares/authMiddleware";
-import { CustomError } from "./Errors/CustomError";
+import { CustomError } from "./errors/CustomError";
 
 
 app.use("/user", userRoutes);

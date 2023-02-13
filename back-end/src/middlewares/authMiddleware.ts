@@ -2,8 +2,6 @@ import { NextFunction, Request, Response } from "express";
 
 import { JwtAdapter } from "../adapters/JwtAdapter/JwtAdapter";
 
-import { CustomError } from "../Errors/CustomError";
-
 const jwt = new JwtAdapter();
 
 export const authMiddleware = ( req: Request, res: Response, next: NextFunction ) => {
