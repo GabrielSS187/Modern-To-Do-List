@@ -8,7 +8,7 @@
     "npm": "8.12.1"
   },
   "scripts": {
-    "start": "node ./dist/index.js",
+    "start": "tsup src && node ./dist/index.js",
     "dev": "tsx watch src/index.ts",
     "build": "tsup src",
     "test": "echo \"Error: no test specified\" && exit 1",
