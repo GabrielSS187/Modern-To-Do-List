@@ -1,4 +1,4 @@
-import { CustomError } from "./CustomError";
+import { CustomError } from "./customError";
 
 export class ErrorTodo extends CustomError {
   constructor(
