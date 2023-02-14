@@ -9,7 +9,7 @@ import {
 
 export class JwtAdapter implements IJwtAdapter {
   generateToken ( {  id  }: IJwtAuthenticationData ) {
-    const expiresIn = "1d";
+    const expiresIn = 1647456000; //* 30 dias
     const token = jwt.sign(
       {
         id,
