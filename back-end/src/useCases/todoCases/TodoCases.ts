@@ -8,7 +8,7 @@ import {
   TDeleteRequest,
   TGetAllTodos
 } from "./validations";
-import { ErrorTodo } from "../../errors/TodoErrors";
+import { ErrorTodo } from "../../errors/todoErrors";
 
 export class TodoCases {
   constructor(

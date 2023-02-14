@@ -11,7 +11,7 @@ import {
   signInRequestSchema
 } from "./validations";
 
-import { ErrorUser } from "../../errors/UserErrors";
+import { ErrorUser } from "../../errors/userErrors";
 
 export class UserCases {
   constructor(
