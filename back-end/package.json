@@ -5,13 +5,13 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "tsup": {
-    "entry": ["src/index.ts"],
+    "entry": ["src/index.ts", "src/errors"],
     "splitting": false,
     "sourcemap": true,
     "clean": true
   },
   "scripts": {
-    "start": "node ./dist/index.js",
+    "start": "tsup && node dist/index.js",
     "dev": "tsx watch src/index.ts",
     "build": "tsup",
     "test": "echo \"Error: no test specified\" && exit 1",
