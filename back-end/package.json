@@ -1,12 +1,9 @@
 {
-  "name": "back-end",
+  "name": "api-vercel-teste",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "engines": {
-    "node": "18.12.1",
-    "npm": "8.12.1"
-  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "start": "npx tsup src && node ./dist/index.js",
     "dev": "tsx watch src/index.ts",
@@ -21,9 +18,21 @@
     "seed:make": "ts-node -r dotenv/config ./node_modules/knex/bin/cli.js --knexfile ./src/config/knexfile.ts seed:make --migrations-directory ../data/seeds",
     "seed:run": "ts-node -r dotenv/config ./node_modules/knex/bin/cli.js --knexfile ./src/config/knexfile.ts seed:run --migrations-directory ../data/seeds"
   },
+  "engines": {
+    "node": ">=18.12",
+    "npm": ">=8.12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GabrielSS187/Api-vercel-teste.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GabrielSS187/Api-vercel-teste/issues"
+  },
+  "homepage": "https://github.com/GabrielSS187/Api-vercel-teste#readme",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.13",
