@@ -2,10 +2,10 @@ import { Request, Response, NextFunction } from "express";
 import { app } from "./server";
 import "express-async-errors";
 
+import { CustomError } from "./errors/CustomError";
 import { userRoutes } from "./routes/userRoutes";
 import { todoRoutes } from "./routes/todoRoutes";
 import { authMiddleware } from "./middlewares/authMiddleware";
-import { CustomError } from "./errors/CustomError";
 
 app.use("/user", userRoutes);
 app.use("/todo", authMiddleware, todoRoutes);

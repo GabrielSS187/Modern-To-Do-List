@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { ITodoRepository } from "../../models/todoModel/interfaces";
+import { TodoErrors } from "../../errors/TodoErrors";
 import { 
   TCreateRequest, 
   createRequestSchema, 
@@ -8,7 +9,6 @@ import {
   TDeleteRequest,
   TGetAllTodos
 } from "./validations";
-import { ErrorTodo } from "../../errors/TodoErrors";
 
 export class TodoCases {
   constructor(
@@ -30,7 +30,7 @@ export class TodoCases {
         validationErrors[error.path[0]] = error.message
       });
 
-      throw new ErrorTodo(validationErrors, 400);
+      throw new TodoErrors(validationErrors, 400);
     };
 
     const { todo } = await validationRequest;
@@ -47,7 +47,7 @@ export class TodoCases {
     const { idUser, idTodo, selectTypeDeleteAll } =  request;
 
     if ( !idTodo && !selectTypeDeleteAll ) {
-      throw new ErrorTodo(
+      throw new TodoErrors(
         { error: "choose one of these options query: idTodo or selectType" }, 
         406
       );
@@ -56,7 +56,7 @@ export class TodoCases {
     if ( idTodo ) {
       const todo = await this.todoRepository.findTodo(idTodo); 
       if ( !todo || todo.id_user !== idUser ) {
-        throw new ErrorTodo({error: "Todo not found."}, 404);
+        throw new TodoErrors({error: "Todo not found."}, 404);
       };
     };
 
@@ -65,7 +65,7 @@ export class TodoCases {
     selectTypeDeleteAll !== "deleteAllComplete" 
     && selectTypeDeleteAll !== "deleteAllIncomplete"
     if ( verifyTypeSelectDeleteAll ) {
-      throw new ErrorTodo(
+      throw new TodoErrors(
         {error: "To delete all todos choose one of the types: deleteAllComplete or deleteAllIncomplete"}, 
         406
       );
@@ -87,11 +87,11 @@ export class TodoCases {
     .findTodo(idTodo);
 
     if (!todo || todo.id_user !== idUser) {
-      throw new ErrorTodo({error: "Todo not found."}, 404);
+      throw new TodoErrors({error: "Todo not found."}, 404);
     };
     
     if (String(status) !== "true" && String(status) !== "false") {
-      throw new ErrorTodo({error: "Status is only allowed: true or false."}, 406);
+      throw new TodoErrors({error: "Status is only allowed: true or false."}, 406);
     };
 
     const transformBoolean =
@@ -109,7 +109,7 @@ export class TodoCases {
     const { idUser, typeList } = request;
 
     if ( typeList !== "complete" && typeList !== "incomplete" ){
-      throw new ErrorTodo(
+      throw new TodoErrors(
         {error: "Type of valid lists: complete or incomplete."}, 
         406
       );

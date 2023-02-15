@@ -4,14 +4,13 @@ import { IUserRepository } from "../../models/userModel/interfaces";
 import { IBCryptAdapter } from "../../adapters/IBcryptAdapter";
 import { IJwtAdapter } from "../../adapters/IJwtAdapter";
 
+import { UserErrors } from "../../errors/UserErrors";
 import { 
   TRegisterRequest,
   registerRequestSchema,
   TSignInRequest,
   signInRequestSchema
 } from "./validations";
-
-import { ErrorUser } from "../../errors/UserErrors";
 
 export class UserCases {
   constructor(
@@ -35,7 +34,7 @@ export class UserCases {
         validationErrors[error.path[0]] = error.message
       });
 
-      throw new ErrorUser(validationErrors, 400);
+      throw new UserErrors(validationErrors, 400);
     };
 
     const {userName, password} = await validationRequest;
@@ -43,7 +42,7 @@ export class UserCases {
     const user = await this.userRepository.findUser({userName});
 
     if(user) {
-      throw new ErrorUser({error: "A user with that name already exists."}, 409);
+      throw new UserErrors({error: "A user with that name already exists."}, 409);
     };
 
     const passwordHash = await this.bcryptAdapter.hashEncrypt({password});
@@ -74,7 +73,7 @@ export class UserCases {
         validationErrors[error.path[0]] = error.message
       });
 
-      throw new ErrorUser(validationErrors, 400);
+      throw new UserErrors(validationErrors, 400);
     };
 
     const {userName, password} = await validationRequest;
@@ -82,7 +81,7 @@ export class UserCases {
     const user = await this.userRepository.findUser({userName});    
 
     if (!user) {
-      throw new ErrorUser({error: "Username does not exist."}, 404);
+      throw new UserErrors({error: "Username does not exist."}, 404);
     };
 
     const decryptPassword = await this.bcryptAdapter.compareHash({
@@ -91,7 +90,7 @@ export class UserCases {
     });
 
     if ( !decryptPassword ) {
-      throw new ErrorUser({error: "Invalid password."}, 406);
+      throw new UserErrors({error: "Invalid password."}, 406);
     };
 
     const generateToken = this.jwtAdapter.generateToken({
@@ -106,7 +105,7 @@ export class UserCases {
 
   async getUserByToken (token: string) {
     if ( !token ) {
-      throw new ErrorUser({error: "The token is required."}, 406);
+      throw new UserErrors({error: "The token is required."}, 406);
     };
 
     const decryptJwt = this.jwtAdapter.getTokenData({
@@ -118,7 +117,7 @@ export class UserCases {
     });
 
     if (!user) {
-      throw new ErrorUser({error: "Invalid token."}, 401);
+      throw new UserErrors({error: "Invalid token."}, 401);
     };
 
     return user;
