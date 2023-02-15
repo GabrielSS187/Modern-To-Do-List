@@ -5,6 +5,6 @@ export class ErrorUser extends CustomError {
     public error: Record<string, string>,
     public statusCode: number
   ){
-    super(error, statusCode);
+    super(JSON.stringify(error), statusCode);
   };
 };
