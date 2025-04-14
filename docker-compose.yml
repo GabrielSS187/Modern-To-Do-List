@@ -1,45 +1,56 @@
-version: "4"
 services:
-  # Create database container
   db:
-    container_name: database-todo
     image: postgres
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=postgres
+    container_name: database-todo
     restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: postgres
     ports:
       - "5432:5432"
-
-  backend-t:
-    # Create backend container  
-    container_name: backend-todo
-    build: ./back-end
-    depends_on:
-      - db
-    links:
-      - db
-    environment:
-      - TZ=America/Sao_Paulo
-      - DATABASE_URL=postgres://postgres:root@db/postgres
     volumes:
       - ./back-end/src/data/data-docker:/var/lib/postgresql/data
+    networks:
+      - todo-net
+
+  backend-t:
+    container_name: backend-todo
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ./back-end:/usr/src/app/backend
+      - /usr/src/app/backend/node_modules
+    working_dir: /usr/src/app/backend
+    environment:
+      DATABASE_URL: postgres://postgres:root@db:5432/postgres
+      API_URL: http://localhost:8000
     restart: always
+    command: sh -c "npm run migrate:latest && npm run dev"
     ports:
       - "8000:8000"
+    networks:
+      - todo-net
 
-  # Create frontend container
   frontend-t:
     container_name: frontend-todo
     build: ./front-end
     depends_on:
       - backend-t
-    links:
-      - backend-t
+    environment:
+      VITE_API_URL: http://localhost:8000
     volumes:
       - ./front-end:/usr/src/app/frontend-todo
-      - /usr/src/app/frontend-todo/node_modules
+      - /usr/src/app/frontend-todo/node_modules:/usr/src/app/frontend-todo/node_modules
     restart: always
+    command: sh -c "npm install && npm run dev"
     ports:
-      - 5173:5173 
+      - "5173:5173"
+    networks:
+      - todo-net
+
+networks:
+  todo-net:
