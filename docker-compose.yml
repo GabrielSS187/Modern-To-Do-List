@@ -10,7 +10,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./back-end/src/data/data-docker:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     networks:
       - todo-net
 
@@ -44,7 +44,7 @@ services:
       VITE_API_URL: http://localhost:8000
     volumes:
       - ./front-end:/usr/src/app/frontend-todo
-      - /usr/src/app/frontend-todo/node_modules:/usr/src/app/frontend-todo/node_modules
+    working_dir: /usr/src/app/frontend-todo
     restart: always
     command: sh -c "npm install && npm run dev"
     ports:
@@ -54,3 +54,6 @@ services:
 
 networks:
   todo-net:
+
+volumes:
+  db_data:
